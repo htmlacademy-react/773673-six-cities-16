@@ -1,4 +1,4 @@
-import PlaceCard from '../components/PlaceCard';
+import PlaceCard from '../components/place-card';
 
 interface IProps {
   offersCount: number;
