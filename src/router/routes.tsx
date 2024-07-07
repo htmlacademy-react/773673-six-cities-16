@@ -10,32 +10,38 @@ import Offer from '../pages/order';
 
 import offers from '../mocks/offers';
 import { LoaderFunction, RouteObject } from 'react-router-dom';
+import BaseLayout from '../layouts/base';
 
 export const routes: RouteObject[] = [
   {
     path: '/',
-    index: true,
-    element: <Main offersCount={200} offersList={offers} />,
-  },
-  {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '/favorites',
-    element: (
-      <PrivateRoute>
-        <Favorites offersList={offers} />
-      </PrivateRoute>
-    ),
-  },
-  {
-    path: '/offer/:id',
-    loader: offerIdLoader as LoaderFunction,
-    element: <Offer />,
-  },
-  {
-    path: '*',
-    element: <NotFound />,
+    element: <BaseLayout />,
+    children: [
+      {
+        index: true,
+        element: <Main offersCount={200} offersList={offers} />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/favorites',
+        element: (
+          <PrivateRoute>
+            <Favorites offersList={offers} />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/offer/:id',
+        loader: offerIdLoader as LoaderFunction,
+        element: <Offer />,
+      },
+      {
+        path: '*',
+        element: <NotFound />,
+      },
+    ],
   },
 ];

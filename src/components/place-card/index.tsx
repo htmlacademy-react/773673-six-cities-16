@@ -3,14 +3,14 @@ import { OfferRespone } from '../../types/offers';
 
 interface IProps extends OfferRespone {
   onMouseOver: (id: string) => void;
-  onMouseOut: () => void;
+  onMouseLeave: () => void;
 }
 
 const PlaceCard = (props: IProps) => (
   <article
     className="cities__card place-card"
     onMouseOver={() => props.onMouseOver(props.id)}
-    onMouseOut={props.onMouseOut}
+    onMouseOut={props.onMouseLeave}
   >
     {props.isPremium && (
       <div className="place-card__mark">
@@ -18,7 +18,7 @@ const PlaceCard = (props: IProps) => (
       </div>
     )}
     <div className="cities__image-wrapper place-card__image-wrapper">
-      <Link to={`/offers/${props.id}`}>
+      <Link to={`/offer/${props.id}`}>
         <img
           className="place-card__image"
           src={props.previewImage}
