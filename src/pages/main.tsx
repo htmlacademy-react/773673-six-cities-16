@@ -1,10 +1,13 @@
-import PlaceCard from '../components/place-card';
+import { OfferRespone } from '../types/offers';
+
+import OffersList from '../components/offers-list';
 
 interface IProps {
   offersCount: number;
+  offersList: OfferRespone[];
 }
 
-const Main = ({ offersCount }: IProps) => (
+const Main = ({ offersCount, offersList }: IProps) => (
   <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -115,17 +118,7 @@ const Main = ({ offersCount }: IProps) => (
                 </li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
-            </div>
+            <OffersList offers={offersList} />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>
