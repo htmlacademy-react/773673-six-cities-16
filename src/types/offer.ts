@@ -1,4 +1,4 @@
-export type OfferRespone = {
+export type Offer = {
   id: string;
   title: string;
   type: string;

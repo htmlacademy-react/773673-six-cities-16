@@ -1,10 +1,9 @@
-import { OfferRespone } from '../types/offers';
-
-import OffersList from '../components/offers-list';
+import PlacesList from '../components/places-list';
+import { Offer } from '../types/offer';
 
 interface IProps {
   offersCount: number;
-  offersList: OfferRespone[];
+  offersList: Offer[];
 }
 
 const Main = ({ offersCount, offersList }: IProps) => (
@@ -80,7 +79,7 @@ const Main = ({ offersCount, offersList }: IProps) => (
                 </li>
               </ul>
             </form>
-            <OffersList offers={offersList} />
+            <PlacesList offers={offersList} />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>

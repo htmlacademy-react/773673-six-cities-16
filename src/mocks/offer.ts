@@ -1,6 +1,6 @@
-import { OfferRespone } from '../types/offers';
+import { Offer } from '../types/offer';
 
-const offers: OfferRespone[] = [
+const offers: Offer[] = [
   {
     id: '4da96d04-80de-4dc8-9149-2d8b5c6375e3',
     title: 'Nice, cozy, warm big bed apartment',

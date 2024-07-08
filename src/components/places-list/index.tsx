@@ -1,11 +1,9 @@
 import { useState } from 'react';
-
-import PlaceCard from '../place-card';
-
-import { OfferRespone } from '../../types/offers';
+import { Offer } from '../../types/offer';
+import { MainPlaceCard } from '../place-card';
 
 interface IProps {
-  offers: OfferRespone[];
+  offers: Offer[];
 }
 
 const OffersList = ({ offers }: IProps) => {
@@ -21,7 +19,7 @@ const OffersList = ({ offers }: IProps) => {
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
-        <PlaceCard
+        <MainPlaceCard
           key={offer.id}
           {...offer}
           onMouseOver={selectCard}

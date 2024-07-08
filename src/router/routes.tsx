@@ -5,10 +5,10 @@ import Login from '../pages/login';
 import Main from '../pages/main';
 import NotFound from '../pages/not-found';
 
-import { offerIdLoader } from '../pages/order/loader';
-import Offer from '../pages/order';
+import Offer from '../pages/offer';
+import { offerDataLoader } from '../pages/offer/loader';
 
-import offers from '../mocks/offers';
+import offers from '../mocks/offer';
 import { LoaderFunction, RouteObject } from 'react-router-dom';
 import BaseLayout from '../layouts/base';
 
@@ -35,7 +35,7 @@ export const routes: RouteObject[] = [
       },
       {
         path: '/offer/:id',
-        loader: offerIdLoader as LoaderFunction,
+        loader: offerDataLoader as LoaderFunction,
         element: <Offer />,
       },
       {
