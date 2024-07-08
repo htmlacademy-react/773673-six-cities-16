@@ -1,11 +1,11 @@
-import { FavoritesPlaceCard } from '../components/place-card';
-import { Offer } from '../types/offer';
+import { OfferType } from '../entities/offer';
+import { FavoritesPlaceCard } from '../widgets/place';
 
 interface IProps {
-  offersList: Offer[];
+  offersList: OfferType[];
 }
 
-type CitiesMap = Record<string, Offer[]>;
+type CitiesMap = Record<string, OfferType[]>;
 
 const Favorites = ({ offersList }: IProps) => {
   const citiesMap: CitiesMap = offersList.reduce((acc: CitiesMap, place) => {

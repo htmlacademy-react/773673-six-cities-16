@@ -1,14 +1,14 @@
 import { useLoaderData } from 'react-router-dom';
 
-import { Offer } from '../../types/offer';
-import { Comment } from '../../types/comments';
+import { OfferType } from '../../entities/offer';
+import { ReviewType } from '../../entities/review';
 
-import ReviewsList from '../../components/reviews-list';
-import ReviewForm from '../../components/review-form';
+import ReviewsList from '../../entities/review/ui/reviews-list';
+import { SendReviewForm } from '../../features/review/send';
 
 type LoaderData = {
-  offer: Offer;
-  comments: Comment[];
+  offer: OfferType;
+  comments: ReviewType[];
 };
 
 //@TODO: Add ReviewForm submit handler
@@ -153,7 +153,7 @@ const OfferPage = (): JSX.Element => {
                   Reviews &middot; <span className="reviews__amount">1</span>
                 </h2>
                 <ReviewsList reviews={comments} />
-                <ReviewForm onSubmit={(formData) => formData} />
+                <SendReviewForm onSubmit={(formData) => formData} />
               </section>
             </div>
           </div>

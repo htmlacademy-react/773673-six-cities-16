@@ -1,9 +1,9 @@
-import PlacesList from '../components/places-list';
-import { Offer } from '../types/offer';
+import { OfferType } from '../entities/offer';
+import { MainPlacesList } from '../widgets/place';
 
 interface IProps {
   offersCount: number;
-  offersList: Offer[];
+  offersList: OfferType[];
 }
 
 const Main = ({ offersCount, offersList }: IProps) => (
@@ -79,7 +79,7 @@ const Main = ({ offersCount, offersList }: IProps) => (
                 </li>
               </ul>
             </form>
-            <PlacesList offers={offersList} />
+            <MainPlacesList offers={offersList} />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>
