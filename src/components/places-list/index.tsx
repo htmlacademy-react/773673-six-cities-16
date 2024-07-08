@@ -8,7 +8,7 @@ interface IProps {
 
 const OffersList = ({ offers }: IProps) => {
   //eslint-disable-next-line
-  const [selectedCard, setSelectedCard] = useState<string | null>(null);
+  const [, setSelectedCard] = useState<string | null>(null);
 
   const selectCard = (id: string) => {
     setSelectedCard(id);
