@@ -23,7 +23,7 @@ const MainPlacesList = ({ offers }: IProps) => {
         <MainPlaceCard
           key={offer.id}
           {...offer}
-          onMouseOver={selectCard}
+          onMouseEnter={selectCard}
           onMouseLeave={clearSelectedCard}
         />
       ))}

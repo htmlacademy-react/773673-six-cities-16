@@ -4,14 +4,14 @@ import { type OfferType } from '../../../entities/offer';
 import { FavoriteButton } from '../../../features/favorites/favorite';
 
 export type MainPlaceCardProps = OfferType & {
-  onMouseOver: (id: string) => void;
+  onMouseEnter: (id: string) => void;
   onMouseLeave: () => void;
 };
 
 const MainPlaceCard = (props: MainPlaceCardProps) => (
   <article
     className="cities__card place-card"
-    onMouseOver={() => props.onMouseOver(props.id)}
+    onMouseOver={() => props.onMouseEnter(props.id)}
     onMouseOut={props.onMouseLeave}
   >
     {props.isPremium && (
