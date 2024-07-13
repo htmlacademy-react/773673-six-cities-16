@@ -8,14 +8,13 @@ interface IProps {
 }
 
 const MainPlacesList = ({ offers }: IProps) => {
-  //eslint-disable-next-line
   const [, setSelectedCard] = useState<string | null>(null);
 
-  const selectCard = (id: string) => {
+  const handleSelectCard = (id: string) => {
     setSelectedCard(id);
   };
 
-  const clearSelectedCard = () => setSelectedCard(null);
+  const handleClearSelectedCard = () => setSelectedCard(null);
 
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -23,8 +22,8 @@ const MainPlacesList = ({ offers }: IProps) => {
         <MainPlaceCard
           key={offer.id}
           {...offer}
-          onMouseEnter={selectCard}
-          onMouseLeave={clearSelectedCard}
+          onSelectCard={handleSelectCard}
+          onClearSelectedCard={handleClearSelectedCard}
         />
       ))}
     </div>

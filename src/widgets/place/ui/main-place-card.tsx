@@ -4,15 +4,15 @@ import { type OfferType } from '../../../entities/offer';
 import { FavoriteButton } from '../../../features/favorites/favorite';
 
 export type MainPlaceCardProps = OfferType & {
-  onMouseEnter: (id: string) => void;
-  onMouseLeave: () => void;
+  onSelectCard: (id: string) => void;
+  onClearSelectedCard: () => void;
 };
 
 const MainPlaceCard = (props: MainPlaceCardProps) => (
   <article
     className="cities__card place-card"
-    onMouseOver={() => props.onMouseEnter(props.id)}
-    onMouseOut={props.onMouseLeave}
+    onMouseEnter={() => props.onSelectCard(props.id)}
+    onMouseLeave={props.onClearSelectedCard}
   >
     {props.isPremium && (
       <div className="place-card__mark">
