@@ -24,28 +24,25 @@ const Favorites = ({ offersList }: IProps) => {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            {
-              //@TODO: add checking for empty cities and offers list
-              citiesMap &&
-                Object.entries(citiesMap).map(([city, offers]) => (
-                  <ul className="favorites__list" key={city}>
-                    <li className="favorites__locations-items">
-                      <div className="favorites__locations locations locations--current">
-                        <div className="locations__item">
-                          <a className="locations__item-link" href="#">
-                            <span>{city}</span>
-                          </a>
-                        </div>
+            {Object.keys(citiesMap).length > 0 &&
+              Object.entries(citiesMap).map(([city, offers]) => (
+                <ul className="favorites__list" key={city}>
+                  <li className="favorites__locations-items">
+                    <div className="favorites__locations locations locations--current">
+                      <div className="locations__item">
+                        <a className="locations__item-link" href="#">
+                          <span>{city}</span>
+                        </a>
                       </div>
-                      <div className="favorites__places">
-                        {offers.map((offer) => (
-                          <FavoritesPlaceCard key={offer.id} {...offer} />
-                        ))}
-                      </div>
-                    </li>
-                  </ul>
-                ))
-            }
+                    </div>
+                    <div className="favorites__places">
+                      {offers.map((offer) => (
+                        <FavoritesPlaceCard key={offer.id} {...offer} />
+                      ))}
+                    </div>
+                  </li>
+                </ul>
+              ))}
           </section>
         </div>
       </main>
