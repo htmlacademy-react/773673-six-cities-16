@@ -4,6 +4,4 @@ export type SendReviewType = Omit<ReviewType, 'id' | 'user'> & {
   offerId: string;
 };
 
-export const sendReview = (review: SendReviewType) => {
-  console.log({ sendReview: review });
-};
+export const sendReview = (review: SendReviewType) => review;
