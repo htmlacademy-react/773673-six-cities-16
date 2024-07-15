@@ -153,7 +153,7 @@ const OfferPage = (): JSX.Element => {
                   Reviews &middot; <span className="reviews__amount">1</span>
                 </h2>
                 <ReviewsList reviews={comments} />
-                <SendReviewForm onSubmit={(formData) => formData} />
+                <SendReviewForm offer={offer} />
               </section>
             </div>
           </div>

@@ -1,1 +1,1 @@
-export { default as SendReviewForm } from './Form';
+export { default as SendReviewForm } from './form';
