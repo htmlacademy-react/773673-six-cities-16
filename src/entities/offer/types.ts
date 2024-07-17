@@ -3,6 +3,30 @@ export type OfferType = {
   title: string;
   type: string;
   price: number;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  previewImage: string;
+  city: {
+    name: string;
+    location: {
+      latitude: number;
+      longitude: number;
+      zoom: number;
+    };
+  };
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+};
+
+export type OfferExtendedType = {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
   city: {
     name: string;
     location: {
@@ -19,5 +43,14 @@ export type OfferType = {
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
-  previewImage: string;
+  description: string;
+  bedrooms: number;
+  goods: [string];
+  host: {
+    name: string;
+    avatarUrl: string;
+    isPro: boolean;
+  };
+  images: [string];
+  maxAdults: number;
 };

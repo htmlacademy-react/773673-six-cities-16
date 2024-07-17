@@ -10,23 +10,24 @@ import Offer from '../../pages/offer';
 import NotFound from '../../pages/not-found';
 import { offerDataLoader } from '../../pages/offer/loader';
 
-import offers from '../../entities/offer/api/mock';
+import { ROUTE_PATHS } from '../../shared/consts/routes';
+import { offers } from '../../entities/offer/api/mock';
 
 export const routes: RouteObject[] = [
   {
-    path: '/',
+    path: ROUTE_PATHS.MAIN,
     element: <BaseLayout />,
     children: [
       {
         index: true,
-        element: <Main offersCount={200} offersList={offers} />,
+        element: <Main />,
       },
       {
-        path: '/login',
+        path: ROUTE_PATHS.LOGIN,
         element: <Login />,
       },
       {
-        path: '/favorites',
+        path: ROUTE_PATHS.FAVORITES,
         element: (
           <PrivateRoute>
             <Favorites offersList={offers} />
@@ -34,12 +35,12 @@ export const routes: RouteObject[] = [
         ),
       },
       {
-        path: '/offer/:id',
+        path: ROUTE_PATHS.OFFER,
         loader: offerDataLoader as LoaderFunction,
         element: <Offer />,
       },
       {
-        path: '*',
+        path: ROUTE_PATHS.NOT_FOUND,
         element: <NotFound />,
       },
     ],

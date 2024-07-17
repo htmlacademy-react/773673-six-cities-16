@@ -1,1 +1,1 @@
-export type { OfferType } from './types';
+export type { OfferType, OfferExtendedType } from './types';
