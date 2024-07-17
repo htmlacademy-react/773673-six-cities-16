@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import ReviewRatingStars from './rating-stars';
 import { sendReview } from '../model';
-import { OfferType } from '../../../../entities/offer';
 
 import { formatDate } from '../../../../shared/lib';
+import { SendReviewFormDataType } from '../model/types';
 
 const initialState = {
   text: '',
@@ -11,11 +11,14 @@ const initialState = {
 };
 
 type SendReviewFormPropsType = {
-  offer: OfferType;
+  id: string;
 };
 
-const SendReviewForm = ({ offer }: SendReviewFormPropsType): JSX.Element => {
-  const [formData, setFormData] = useState(initialState);
+export const SendReviewForm = ({
+  id,
+}: SendReviewFormPropsType): JSX.Element => {
+  const [formData, setFormData] =
+    useState<SendReviewFormDataType>(initialState);
 
   const submitDisabled = formData.text.length < 50;
 
@@ -36,12 +39,11 @@ const SendReviewForm = ({ offer }: SendReviewFormPropsType): JSX.Element => {
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const { id } = offer;
     const time = new Date();
     const formattedDateString = formatDate(time);
 
     sendReview({
-      comment: formData.text,
+      text: formData.text,
       rating: formData.rating,
       date: formattedDateString,
       offerId: id,
@@ -85,5 +87,3 @@ const SendReviewForm = ({ offer }: SendReviewFormPropsType): JSX.Element => {
     </form>
   );
 };
-
-export default SendReviewForm;

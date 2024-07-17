@@ -2,16 +2,16 @@ import { ReviewType } from '../types';
 
 const commetns: ReviewType[] = [
   {
-    id: 'b67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
-    date: '2019-05-08T14:13:56.569Z',
+    id: '1840f583-6fea-4d50-a104-41801658f1bb',
+    comment:
+      'The room was spacious and clean. The pool looked nothing like the photos and desparately needs a clean. The sauna and spa were closed for lunar new year holiday.',
+    date: '2024-06-24T21:00:00.705Z',
+    rating: 5,
     user: {
-      name: 'Oliver Conner',
-      avatarUrl: 'https://url-to-image/image.png',
+      name: 'Emely',
+      avatarUrl: 'https://16.design.htmlacademy.pro/static/avatar/5.jpg',
       isPro: false,
     },
-    comment:
-      'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-    rating: 4,
   },
 ];
 

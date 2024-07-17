@@ -1,7 +1,7 @@
-import { OfferType } from '../entities/offer';
+import { OfferCard, OfferType, OffersList } from '../entities/offer';
+import { FavoriteButton } from '../features/favorites/toggle';
 
 import { Footer } from '../shared/ui';
-import { FavoritesPlaceCard } from '../widgets/place';
 
 interface IProps {
   offersList: OfferType[];
@@ -38,9 +38,17 @@ const Favorites = ({ offersList }: IProps) => {
                       </div>
                     </div>
                     <div className="favorites__places">
-                      {offers.map((offer) => (
-                        <FavoritesPlaceCard key={offer.id} {...offer} />
-                      ))}
+                      <OffersList
+                        kind="favorites"
+                        offers={offers}
+                        renderCard={(offer) => (
+                          <OfferCard
+                            kind="favorites"
+                            offer={offer}
+                            favoriteButton={<FavoriteButton id={offer.id} />}
+                          />
+                        )}
+                      />
                     </div>
                   </li>
                 </ul>

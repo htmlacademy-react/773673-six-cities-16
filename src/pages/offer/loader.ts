@@ -3,7 +3,7 @@ import { LoaderFunctionArgs } from 'react-router-dom';
 import { OfferType } from '../../entities/offer';
 
 import comments from '../../entities/review/api/mock';
-import { offers } from '../../entities/offer/api/mock';
+import { offers } from '../../entities/offer/mock/offers';
 
 export const offerDataLoader = ({ params }: LoaderFunctionArgs) => {
   const targetOffer = offers.find(

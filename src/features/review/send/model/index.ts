@@ -1,7 +1,3 @@
-import { ReviewType } from '../../../../entities/review';
-
-export type SendReviewType = Omit<ReviewType, 'id' | 'user'> & {
-  offerId: string;
-};
+import { SendReviewType } from './types';
 
 export const sendReview = (review: SendReviewType) => review;
