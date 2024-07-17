@@ -4,7 +4,7 @@ export const formatDate = (date: string | Date): string => {
   const dateInstance = isDate(date) ? date : new Date(date);
 
   const [month, day, year] = [
-    dateInstance.getMonth().toString().padStart(2, '0'),
+    (dateInstance.getMonth() + 1).toString().padStart(2, '0'),
     dateInstance.getDate(),
     dateInstance.getFullYear(),
   ];
