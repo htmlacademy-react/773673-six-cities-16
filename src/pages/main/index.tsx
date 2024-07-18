@@ -43,12 +43,21 @@ export const Main = () => {
               key={offer.id}
               kind="cities"
               offer={offer}
-              favoriteButton={<FavoriteButton id={offer.id} />}
+              favoriteButton={
+                <FavoriteButton id={offer.id} isFavorite={offer.isFavorite} />
+              }
             />
           )}
         />
       }
-      map={<Map city={currentCity} points={offers} selectedPoint={offers[0]} />}
+      map={
+        <Map
+          kind="cities"
+          city={currentCity}
+          points={offers}
+          selectedPoint={offers[0]}
+        />
+      }
     />
   );
 };

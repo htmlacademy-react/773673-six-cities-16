@@ -4,15 +4,21 @@ import { layerGroup, Marker } from 'leaflet';
 import useMap from './hooks/use-map';
 import { currentCustomIcon, defaultCustomIcon } from './icons';
 import { CityType } from '../../entities/city';
-import { OfferType } from '../../entities/offer';
+import { PointType } from './types';
 
 type MapProps = {
   city: CityType;
-  points: OfferType[];
-  selectedPoint: OfferType | undefined;
+  points: PointType[];
+  selectedPoint: PointType | undefined;
+  kind: 'offer' | 'cities';
 };
 
-export const Map = ({ city, points, selectedPoint }: MapProps): JSX.Element => {
+export const Map = ({
+  city,
+  points,
+  selectedPoint,
+  kind = 'cities',
+}: MapProps): JSX.Element => {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -40,5 +46,7 @@ export const Map = ({ city, points, selectedPoint }: MapProps): JSX.Element => {
     }
   }, [map, points, selectedPoint]);
 
-  return <section className="cities__map map" ref={mapRef}></section>;
+  const classname = kind === 'offer' ? 'offer__map map' : 'cities__map map';
+
+  return <section className={classname} ref={mapRef}></section>;
 };

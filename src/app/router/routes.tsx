@@ -7,7 +7,7 @@ import { PrivateRoute } from '../../shared/framework';
 
 import Login from '../../pages/login';
 import { Main } from '../../pages/main';
-import Favorites from '../../pages/favorites';
+import { Favorites } from '../../pages/favorites';
 import Offer from '../../pages/offer';
 import NotFound from '../../pages/not-found';
 

@@ -13,6 +13,7 @@ import { Features } from './ui/features';
 import { Gallery } from './ui/gallery';
 import { Goods } from './ui/goods';
 import { Host } from './ui/host';
+import { Map } from '../../widgets/map';
 
 //@TODO: Add ReviewForm submit handler
 const OfferPage = (): JSX.Element => (
@@ -59,7 +60,13 @@ const OfferPage = (): JSX.Element => (
             </section>
           </div>
         </div>
-        <section className="offer__map map"></section>
+
+        <Map
+          kind="offer"
+          city={offer.city}
+          points={offers}
+          selectedPoint={offer}
+        />
       </section>
       <div className="container">
         <section className="near-places places">
