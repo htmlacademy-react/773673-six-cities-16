@@ -81,7 +81,9 @@ const OfferPage = (): JSX.Element => (
                 key={item.id}
                 kind="nearby"
                 offer={item}
-                favoriteButton={<FavoriteButton id={item.id} />}
+                favoriteButton={
+                  <FavoriteButton id={item.id} isFavorite={item.isFavorite} />
+                }
               />
             )}
           />
