@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { OfferCardProps } from './types';
+import { FavoriteButton } from '../toggle-favorite-button';
 
 export const FavoritesOfferCard = ({ offer }: OfferCardProps) => (
   <article className="favorites__card place-card">
@@ -25,7 +26,11 @@ export const FavoritesOfferCard = ({ offer }: OfferCardProps) => (
           <b className="place-card__price-value">&euro;{offer.price}</b>
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
-        {favoriteButton}
+        <FavoriteButton
+          id={offer.id}
+          isFavorite={offer.isFavorite}
+          onToggle={(id) => id}
+        />
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
