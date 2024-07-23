@@ -1,9 +1,6 @@
 import { RouteObject } from 'react-router-dom';
 
-import { ROUTE_PATHS } from '../../shared/consts/routes';
-
 import { BaseLayout } from '../../shared/ui';
-import { PrivateRoute } from '../../shared/framework';
 
 import Login from '../../pages/login';
 import { Main } from '../../pages/main';
@@ -11,7 +8,9 @@ import { Favorites } from '../../pages/favorites';
 import Offer from '../../pages/offer';
 import NotFound from '../../pages/not-found';
 
-import { offers } from '../../entities/offer/mock/offers';
+import { ROUTE_PATHS } from '@/consts/routes';
+import PrivateRoute from '@/shared/framework/private-route';
+import { offers } from '@/mocks/offers';
 
 export const routes: RouteObject[] = [
   {

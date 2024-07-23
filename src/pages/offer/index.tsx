@@ -1,19 +1,17 @@
-import { SendReviewForm } from '../../features/review/send';
-import { FavoriteButton } from '../../features/favorites/toggle';
-
-import { offer, offers } from '../../entities/offer/mock/offers';
-import { OffersList, OfferCard } from '../../entities/offer';
-
-import comments from '../../entities/review/api/mock';
-import ReviewsList from '../../entities/review/ui/reviews-list';
-
+import { OffersList } from '@/components/offers-list';
+import ReviewsList from '@/components/reviews-list';
+import { SendReviewForm } from '@/components/send-review-form/form';
+import { offer } from '@/mocks/offer';
+import { offers } from '@/mocks/offers';
 import { RatingStars } from '../../shared/ui/rating-stars';
+
+import { Map } from '@/components/map';
 
 import { Features } from './ui/features';
 import { Gallery } from './ui/gallery';
 import { Goods } from './ui/goods';
 import { Host } from './ui/host';
-import { Map } from '../../widgets/map';
+import reviews from '@/mocks/mock';
 
 //@TODO: Add ReviewForm submit handler
 const OfferPage = (): JSX.Element => (
@@ -53,9 +51,9 @@ const OfferPage = (): JSX.Element => (
             <section className="offer__reviews reviews">
               <h2 className="reviews__title">
                 Reviews &middot;{' '}
-                <span className="reviews__amount">{comments.length}</span>
+                <span className="reviews__amount">{reviews.length}</span>
               </h2>
-              <ReviewsList reviews={comments} />
+              <ReviewsList reviews={reviews} />
               <SendReviewForm id={offer.id} />
             </section>
           </div>
@@ -73,20 +71,7 @@ const OfferPage = (): JSX.Element => (
           <h2 className="near-places__title">
             Other places in the neighbourhood
           </h2>
-          <OffersList
-            kind="nearby"
-            offers={offers}
-            renderCard={(item) => (
-              <OfferCard
-                key={item.id}
-                kind="nearby"
-                offer={item}
-                favoriteButton={
-                  <FavoriteButton id={item.id} isFavorite={item.isFavorite} />
-                }
-              />
-            )}
-          />
+          <OffersList kind="nearby" offers={offers} />
         </section>
       </div>
     </main>

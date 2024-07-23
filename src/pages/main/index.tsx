@@ -1,63 +1,51 @@
-import { useLocationsList } from './hooks/useLocationsList';
+import { ReactNode, useState } from 'react';
 
-import { OffersList, OfferCard } from '../../entities/offer';
-import { CityType } from '../../entities/city';
+import { City } from '@/types/city';
+import { Offer } from '@/types/offer';
 
-import { FavoriteButton } from '../../features/favorites/toggle';
 import { Navigation } from './ui/navigation';
-import { LocationsTitle } from './ui/locations-title';
-import { PlacesSorting } from './ui/places-sorting';
 
-import { Map } from '../../widgets/map';
-import { Layout } from './ui/layout';
+import { offers } from '@/mocks/offers';
+import { cities } from '@/consts/cities';
+import { LocationsList } from '@/components/locations-list';
+import { EmptyLocation } from './ui/empty-location';
 
-import { cities } from './consts';
+const locationsMap = cities.reduce((acc, current) => {
+  const offersByCity = offers.filter(({ city }) => city.name === current.name);
+  acc.set(current, offersByCity);
 
-export const Main = () => {
-  const { currentCity, setCurrentCity, offers } = useLocationsList(cities);
+  return acc;
+}, new Map<City, Offer[]>());
 
-  const offersCount = offers.length;
+export const Main = (): ReactNode => {
+  const [currentCity, setCurrentCity] = useState<City>(cities[0]);
+  const currentOffers = locationsMap.get(currentCity) as Offer[];
 
-  const handleChangeCity = (city: CityType) => {
+  const handleChangeCity = (city: City) => {
     setCurrentCity(city);
   };
+
   return (
-    <Layout
-      navigation={
-        <Navigation
-          cities={cities}
-          currentCity={currentCity}
-          onChangeCity={handleChangeCity}
-        />
-      }
-      title={
-        <LocationsTitle offersCount={offersCount} city={currentCity.name} />
-      }
-      sorting={<PlacesSorting />}
-      offersList={
-        <OffersList
-          kind="cities"
-          offers={offers}
-          renderCard={(offer) => (
-            <OfferCard
-              key={offer.id}
-              kind="cities"
-              offer={offer}
-              favoriteButton={
-                <FavoriteButton id={offer.id} isFavorite={offer.isFavorite} />
-              }
+    <div className="page page--gray page--main">
+      <main className="page__main page__main--index">
+        <h1 className="visually-hidden">Cities</h1>
+        <div className="tabs">
+          <section className="locations container">
+            <Navigation
+              cities={cities}
+              currentCity={currentCity}
+              onChangeCity={handleChangeCity}
             />
+          </section>
+        </div>
+        <div className="cities">
+          {currentOffers.length ? (
+            <LocationsList offers={currentOffers} currentCity={currentCity} />
+          ) : (
+            <EmptyLocation currentCity={currentCity} />
           )}
-        />
-      }
-      map={
-        <Map
-          kind="cities"
-          city={currentCity}
-          points={offers}
-          selectedPoint={offers[0]}
-        />
-      }
-    />
+        </div>
+      </main>
+    </div>
   );
 };

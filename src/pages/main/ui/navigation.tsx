@@ -1,10 +1,10 @@
+import { City } from '@/types/city';
 import cn from 'classnames';
-import { CityType } from '../../../entities/city';
 
 type NavigationPropsType = {
-  cities: CityType[];
-  currentCity: CityType;
-  onChangeCity: (city: CityType) => void;
+  cities: City[];
+  currentCity: City;
+  onChangeCity: (city: City) => void;
 };
 
 export const Navigation = ({

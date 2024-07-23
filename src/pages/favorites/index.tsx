@@ -1,12 +1,13 @@
-import { OfferType } from '../../entities/offer';
-import { Footer } from '../../shared/ui';
+import { Offer } from '@/types/offer';
+
 import { LocationsList } from './ui/locations-list';
+import Footer from '@/components/footer';
 
 interface IProps {
-  offersList: OfferType[];
+  offersList: Offer[];
 }
 
-type CitiesMap = Record<string, OfferType[]>;
+type CitiesMap = Record<string, Offer[]>;
 
 export const Favorites = ({ offersList }: IProps) => {
   const citiesMap: CitiesMap = offersList.reduce((acc: CitiesMap, place) => {

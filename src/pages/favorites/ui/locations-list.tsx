@@ -1,8 +1,8 @@
-import { OfferType, OffersList, OfferCard } from '../../../entities/offer';
-import { FavoriteButton } from '../../../features/favorites/toggle';
+import { OffersList } from '@/components/offers-list';
+import { Offer } from '@/types/offer';
 
 type LocationsListPropsType = {
-  locations: Record<string, OfferType[]>;
+  locations: Record<string, Offer[]>;
 };
 
 export const LocationsList = ({ locations }: LocationsListPropsType) => (
@@ -20,23 +20,7 @@ export const LocationsList = ({ locations }: LocationsListPropsType) => (
               </div>
             </div>
             <div className="favorites__places">
-              <OffersList
-                kind="favorites"
-                offers={offers}
-                renderCard={(offer) => (
-                  <OfferCard
-                    key={offer.id}
-                    kind="favorites"
-                    offer={offer}
-                    favoriteButton={
-                      <FavoriteButton
-                        id={offer.id}
-                        isFavorite={offer.isFavorite}
-                      />
-                    }
-                  />
-                )}
-              />
+              <OffersList kind="favorites" offers={offers} />
             </div>
           </li>
         </ul>
