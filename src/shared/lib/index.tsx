@@ -1,3 +1,6 @@
+import { City } from '@/types/city';
+import { Offer } from '@/types/offer';
+
 const isDate = (date: unknown): date is Date => date instanceof Date;
 
 export const formatDate = (date: string | Date): string => {
@@ -11,3 +14,13 @@ export const formatDate = (date: string | Date): string => {
 
   return [year, month, day].join('-');
 };
+
+export const offersToLocationsList = (cities: City[], offersList: Offer[]) =>
+  cities.reduce((acc, current) => {
+    const offersByCity = offersList.filter(
+      ({ city }) => city.name === current.name,
+    );
+    acc.set(current, offersByCity);
+
+    return acc;
+  }, new Map<City, Offer[]>());

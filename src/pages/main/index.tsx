@@ -1,28 +1,21 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
+
+import { useCities } from '@/hooks/use-change-city';
 
 import { City } from '@/types/city';
-import { Offer } from '@/types/offer';
 
 import { Navigation } from './ui/navigation';
-
-import { offers } from '@/mocks/offers';
-import { cities } from '@/consts/cities';
-import { LocationsList } from '@/components/locations-list';
 import { EmptyLocation } from './ui/empty-location';
 
-const locationsMap = cities.reduce((acc, current) => {
-  const offersByCity = offers.filter(({ city }) => city.name === current.name);
-  acc.set(current, offersByCity);
+import { LocationsList } from '@/components/locations-list';
 
-  return acc;
-}, new Map<City, Offer[]>());
+import { cities } from '@/consts/cities';
 
 export const Main = (): ReactNode => {
-  const [currentCity, setCurrentCity] = useState<City>(cities[0]);
-  const currentOffers = locationsMap.get(currentCity) as Offer[];
+  const [currentCity, currentOffers, changeCity] = useCities(cities);
 
   const handleChangeCity = (city: City) => {
-    setCurrentCity(city);
+    changeCity(city);
   };
 
   return (
