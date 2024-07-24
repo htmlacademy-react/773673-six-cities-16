@@ -1,17 +1,18 @@
 import { OffersList } from '@/components/offers-list';
 import ReviewsList from '@/components/reviews-list';
 import { SendReviewForm } from '@/components/send-review-form/form';
+import { Map } from '@/components/map';
+
 import { offer } from '@/mocks/offer';
 import { offers } from '@/mocks/offers';
-import { RatingStars } from '../../shared/ui/rating-stars';
-
-import { Map } from '@/components/map';
+import reviews from '@/mocks/mock';
 
 import { Features } from './ui/features';
 import { Gallery } from './ui/gallery';
 import { Goods } from './ui/goods';
 import { Host } from './ui/host';
-import reviews from '@/mocks/mock';
+
+import { RatingStars } from '@/shared/ui/rating-stars';
 
 //@TODO: Add ReviewForm submit handler
 const OfferPage = (): JSX.Element => (
