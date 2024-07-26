@@ -1,8 +1,17 @@
 import { useState } from 'react';
 import cn from 'classnames';
 
-export const PlacesSorting = () => {
+const sortingTypes = [
+  'Popular',
+  'Price: low to high',
+  'Price: high to low',
+  'Top rated first',
+] as const;
+
+export const SortingTypes = () => {
   const [isOpened, setIsOpened] = useState(false);
+  const [sortingType, setSortingType] =
+    useState<(typeof sortingTypes)[number]>('Popular');
 
   const handleChangeIsOpened = () => {
     setIsOpened((prevState) => !prevState);

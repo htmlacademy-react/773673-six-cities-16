@@ -4,7 +4,7 @@ import { useCities } from '@/hooks/use-change-city';
 
 import { City } from '@/types/city';
 
-import { Navigation } from './ui/navigation';
+import { CitiesList } from './ui/cities-list';
 import { EmptyLocation } from './ui/empty-location';
 
 import { LocationsList } from '@/components/locations-list';
@@ -24,7 +24,7 @@ export const Main = (): ReactNode => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <Navigation
+            <CitiesList
               cities={cities}
               currentCity={currentCity}
               onChangeCity={handleChangeCity}

@@ -1,6 +1,6 @@
 import { LocationsTitle } from '@/pages/main/ui/locations-title';
 import { Map as MapComponent } from './map';
-import { PlacesSorting } from '@/pages/main/ui/places-sorting';
+import { SortingTypes } from '@/pages/main/ui/sorting-types';
 import { Offer } from '@/types/offer';
 import { OffersList } from './offers-list';
 import { City } from '@/types/city';
@@ -17,7 +17,7 @@ export const LocationsList = ({ offers, currentCity }: LocationsListProps) => {
 
         <LocationsTitle offersCount={offersCount} city={currentCity.name} />
 
-        <PlacesSorting />
+        <SortingTypes />
         <OffersList kind="cities" offers={offers} />
       </section>
       <div className="cities__right-section">
