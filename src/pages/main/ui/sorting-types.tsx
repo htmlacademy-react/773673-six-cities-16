@@ -8,24 +8,31 @@ const sortingTypes = [
   'Top rated first',
 ] as const;
 
+type SortingType = (typeof sortingTypes)[number];
+
 export const SortingTypes = () => {
   const [isOpened, setIsOpened] = useState(false);
-  const [sortingType, setSortingType] =
-    useState<(typeof sortingTypes)[number]>('Popular');
+  const [currentSortingType, setCurrentSortingType] =
+    useState<SortingType>('Popular');
 
   const handleChangeIsOpened = () => {
     setIsOpened((prevState) => !prevState);
   };
 
+  const handleChangeSortingType = (sorting: SortingType) => {
+    setCurrentSortingType(sorting);
+    setIsOpened(false);
+  };
+
   return (
     <form className="places__sorting" action="#" method="get">
-      <span className="places__sorting-caption">Sort by</span>
+      <span className="places__sorting-caption">Sort by </span>
       <span
         className="places__sorting-type"
         tabIndex={0}
         onClick={handleChangeIsOpened}
       >
-        Popular
+        {currentSortingType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
@@ -35,18 +42,18 @@ export const SortingTypes = () => {
           'places__options--opened': isOpened,
         })}
       >
-        <li className="places__option places__option--active" tabIndex={0}>
-          Popular
-        </li>
-        <li className="places__option" tabIndex={0}>
-          Price: low to high
-        </li>
-        <li className="places__option" tabIndex={0}>
-          Price: high to low
-        </li>
-        <li className="places__option" tabIndex={0}>
-          Top rated first
-        </li>
+        {sortingTypes.map((sorting) => (
+          <li
+            onClick={() => handleChangeSortingType(sorting)}
+            key={sorting}
+            className={cn('places__option', {
+              'places__option--active': sorting === currentSortingType,
+            })}
+            tabIndex={0}
+          >
+            {sorting}
+          </li>
+        ))}
       </ul>
     </form>
   );

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { useCities } from '@/hooks/use-change-city';
+import { useCities } from '@/hooks/use-cities';
 
 import { City } from '@/types/city';
 
