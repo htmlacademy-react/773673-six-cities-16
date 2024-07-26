@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from '@/hooks/store';
 import { City } from '@/types/city';
 import { Offer } from '@/types/offer';
 
-import { cityChanged } from '@/store/actions';
-
+import { cityChanged } from '@/store/current-city';
 import { offersToLocationsList } from '@/shared/lib';
 
 export const useCities = (cities: City[]) => {

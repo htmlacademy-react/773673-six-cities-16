@@ -1,6 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { reducer } from './reducer';
+import offersReducer from './offers';
+import currentCityReducer from './current-city';
 
 export const store = configureStore({
-  reducer,
+  reducer: {
+    offers: offersReducer,
+    currentCity: currentCityReducer,
+  },
 });
