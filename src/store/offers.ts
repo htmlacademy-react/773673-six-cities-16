@@ -4,15 +4,19 @@ import { Offer } from '@/types/offer';
 
 import { offers } from '@/mocks/offers';
 
-type OffersState = Offer[];
+type OffersState = {
+  offers: Offer[];
+};
 
-const initialState: OffersState = offers;
+const initialState: OffersState = { offers };
 
 export const offersSlice = createSlice({
   name: 'offers',
   initialState,
   reducers: {
-    loaded: (state, action: PayloadAction<Offer[]>) => action.payload,
+    loaded: (state, action: PayloadAction<Offer[]>) => {
+      state.offers = action.payload;
+    },
   },
 });
 

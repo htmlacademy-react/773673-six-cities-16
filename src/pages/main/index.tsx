@@ -1,20 +1,29 @@
 import { ReactNode } from 'react';
 
 import { useCities } from '@/hooks/use-cities';
+import { useSortOffers } from '@/hooks/use-sort-offers';
 
 import { City } from '@/types/city';
 
 import { CitiesList } from './ui/cities-list';
 import { EmptyLocation } from './ui/empty-location';
+import { LocationsTitle } from './ui/locations-title';
+import { SortingMenu } from './ui/sorting-menu';
 
-import { LocationsList } from '@/components/locations-list';
+import { Map as MapComponent } from '@/components/map';
+import { OffersList } from '@/components/offers-list';
 
 import { cities } from '@/consts/cities';
+import { offers } from '@/mocks/offers';
 
 export const Main = (): ReactNode => {
   const [currentCity, currentOffers, changeCity] = useCities(cities);
+  const [sortedOffers, sortingType, setSortingType] =
+    useSortOffers(currentOffers);
 
-  const handleChangeCity = (city: City) => {
+  const offersCount = currentOffers.length;
+
+  const handleCityChanged = (city: City) => {
     changeCity(city);
   };
 
@@ -27,13 +36,34 @@ export const Main = (): ReactNode => {
             <CitiesList
               cities={cities}
               currentCity={currentCity}
-              onChangeCity={handleChangeCity}
+              onChangeCity={handleCityChanged}
             />
           </section>
         </div>
         <div className="cities">
           {currentOffers.length ? (
-            <LocationsList offers={currentOffers} currentCity={currentCity} />
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <LocationsTitle
+                  offersCount={offersCount}
+                  city={currentCity.name}
+                />
+                <SortingMenu
+                  currentSortingType={sortingType}
+                  onSortingTypeChanged={setSortingType}
+                />
+                <OffersList kind="cities" offers={sortedOffers} />
+              </section>
+              <div className="cities__right-section">
+                <MapComponent
+                  kind="cities"
+                  city={currentCity}
+                  points={offers}
+                  selectedPoint={offers[0]}
+                />
+              </div>
+            </div>
           ) : (
             <EmptyLocation currentCity={currentCity} />
           )}

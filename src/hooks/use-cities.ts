@@ -6,10 +6,11 @@ import { Offer } from '@/types/offer';
 import { cityChanged } from '@/store/current-city';
 import { offersToLocationsList } from '@/shared/lib';
 
+//@TODO: offersToLocationsList перенести в selectors
 export const useCities = (cities: City[]) => {
   const { currentCity, offers } = useSelector((state) => ({
-    currentCity: state.currentCity,
-    offers: state.offers,
+    currentCity: state.currentCity.currentCity,
+    offers: state.offers.offers,
   }));
 
   const locationsMap = offersToLocationsList(cities, offers);
