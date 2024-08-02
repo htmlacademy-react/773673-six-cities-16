@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import { OfferCardProps } from './types';
-import { RatingStars } from '../../shared/ui/rating-stars';
+import { RatingStars } from '@/shared/ui/rating-stars';
+import { FavoriteButton } from '../toggle-favorite-button';
 
-export const OfferCardNearby = ({ offer, favoriteButton }: OfferCardProps) => (
+export const OfferCardNearby = ({ offer }: OfferCardProps) => (
   <article className="near-places__card place-card">
     {offer.isPremium && (
       <div className="place-card__mark">
@@ -26,7 +27,11 @@ export const OfferCardNearby = ({ offer, favoriteButton }: OfferCardProps) => (
           <b className="place-card__price-value">&euro;{offer.price}</b>
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
-        {favoriteButton}
+        <FavoriteButton
+          id={offer.id}
+          isFavorite={offer.isFavorite}
+          onToggle={(id) => id}
+        />
       </div>
       <RatingStars value={offer.rating} kind="place" />
       <h2 className="place-card__name">

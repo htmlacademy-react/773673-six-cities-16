@@ -7,7 +7,7 @@ type NavigationPropsType = {
   onChangeCity: (city: City) => void;
 };
 
-export const Navigation = ({
+export const CitiesList = ({
   cities,
   currentCity,
   onChangeCity,
