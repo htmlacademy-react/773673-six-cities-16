@@ -1,5 +1,6 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+import { RootState } from '@/types/store';
 import { City } from '@/types/city';
 
 import { cities } from '@/consts/cities';
@@ -21,6 +22,9 @@ export const currentCitySlice = createSlice({
     },
   },
 });
+
+export const selectCurrentCity = (state: RootState) =>
+  state.currentCity.currentCity;
 
 export const { changed: cityChanged } = currentCitySlice.actions;
 

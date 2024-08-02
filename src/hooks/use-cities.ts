@@ -1,24 +1,21 @@
 import { useDispatch, useSelector } from '@/hooks/store';
 
 import { City } from '@/types/city';
-import { Offer } from '@/types/offer';
 
-import { cityChanged } from '@/store/current-city';
-import { offersToLocationsList } from '@/shared/lib';
+import { selectOffersByCity } from '@/store/offers';
+import { cityChanged, selectCurrentCity } from '@/store/current-city';
 
 //@TODO: offersToLocationsList перенести в selectors
-export const useCities = (cities: City[]) => {
-  const { currentCity, offers } = useSelector((state) => ({
-    currentCity: state.currentCity.currentCity,
-    offers: state.offers.offers,
-  }));
+export const useFilterOffersByCity = () => {
+  const currentCity = useSelector(selectCurrentCity);
 
-  const locationsMap = offersToLocationsList(cities, offers);
-  const currentOffers = locationsMap.get(currentCity) as Offer[];
+  const filteredOffers = useSelector((state) =>
+    selectOffersByCity(state, currentCity.name),
+  );
 
   const dispatch = useDispatch();
 
-  const setCity = (city: City) => dispatch(cityChanged(city));
+  const changeCity = (city: City) => dispatch(cityChanged(city));
 
-  return [currentCity, currentOffers, setCity] as const;
+  return [currentCity, filteredOffers, changeCity] as const;
 };

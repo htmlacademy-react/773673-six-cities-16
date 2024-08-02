@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { useCities } from '@/hooks/use-cities';
+import { useFilterOffersByCity } from '@/hooks/use-cities';
 import { useSortOffers } from '@/hooks/use-sort-offers';
 
 import { City } from '@/types/city';
@@ -14,10 +14,10 @@ import { Map as MapComponent } from '@/components/map';
 import { OffersList } from '@/components/offers-list';
 
 import { cities } from '@/consts/cities';
-import { offers } from '@/mocks/offers';
 
 export const Main = (): ReactNode => {
-  const [currentCity, currentOffers, changeCity] = useCities(cities);
+  const [currentCity, currentOffers, changeCity] = useFilterOffersByCity();
+
   const [sortedOffers, sortingType, setSortingType] =
     useSortOffers(currentOffers);
 
@@ -59,8 +59,8 @@ export const Main = (): ReactNode => {
                 <MapComponent
                   kind="cities"
                   city={currentCity}
-                  points={offers}
-                  selectedPoint={offers[0]}
+                  points={currentOffers}
+                  selectedPoint={currentOffers[0]}
                 />
               </div>
             </div>
