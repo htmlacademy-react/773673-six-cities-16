@@ -6,13 +6,13 @@ import { SortingTypes } from '@/consts/sorting-types';
 
 const sortOffersByType = (offers: Offer[], sortingType: SortingTypes) => {
   switch (sortingType) {
-    case 'Popular':
+    case SortingTypes.POPULAR:
       return offers.sort((a, b) => b.rating - a.rating);
-    case 'Price: low to high':
+    case SortingTypes.PRICE_LOW_TO_HIGH:
       return offers.sort((a, b) => a.price - b.price);
-    case 'Price: high to low':
+    case SortingTypes.PRICE_HIGH_TO_LOW:
       return offers.sort((a, b) => b.price - a.price);
-    case 'Top rated first':
+    case SortingTypes.TOP_RATED_FIRST:
     default:
       return offers;
   }

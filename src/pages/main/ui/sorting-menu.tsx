@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import cn from 'classnames';
+
 import { SortingTypes } from '@/consts/sorting-types';
 
 type SortingMenuProps = {

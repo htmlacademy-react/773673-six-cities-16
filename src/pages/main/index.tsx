@@ -14,17 +14,22 @@ import { Map as MapComponent } from '@/components/map';
 import { OffersList } from '@/components/offers-list';
 
 import { cities } from '@/consts/cities';
+import { SortingTypes } from '@/consts/sorting-types';
 
 export const Main = (): ReactNode => {
   const [currentCity, currentOffers, changeCity] = useFilterOffersByCity();
 
-  const [sortedOffers, sortingType, setSortingType] =
+  const [sortedOffers, sortingType, changeSortingType] =
     useSortOffers(currentOffers);
 
   const offersCount = currentOffers.length;
 
   const handleCityChanged = (city: City) => {
     changeCity(city);
+  };
+
+  const handleSortingTypeChanged = (type: SortingTypes) => {
+    changeSortingType(type);
   };
 
   return (
@@ -51,7 +56,7 @@ export const Main = (): ReactNode => {
                 />
                 <SortingMenu
                   currentSortingType={sortingType}
-                  onSortingTypeChanged={setSortingType}
+                  onSortingTypeChanged={handleSortingTypeChanged}
                 />
                 <OffersList kind="cities" offers={sortedOffers} />
               </section>
