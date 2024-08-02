@@ -2,12 +2,15 @@
   text-align: center;
 }
 
-.page-not-found {
+.page--not-found {
+  min-height: 100vh;
+}
+.not-found-content {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  min-height: 100vh;
+  height: 80vh;
 }
 
 .page-not-found__title {
