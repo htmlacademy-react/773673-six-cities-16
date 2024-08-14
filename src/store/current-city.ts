@@ -23,8 +23,9 @@ export const currentCitySlice = createSlice({
   },
 });
 
-export const selectCurrentCity = (state: RootState) =>
-  state.currentCity.currentCity;
+export const currentCitySelector = {
+  currentCity: (state: RootState) => state.currentCity.currentCity,
+};
 
 export const { changed: cityChanged } = currentCitySlice.actions;
 

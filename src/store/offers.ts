@@ -62,14 +62,13 @@ export const { loaded: offersLoaded } = offersSlice.actions;
 const filterOffersByCity = (offersList: Offer[], cityName: string) =>
   offersList.filter((offer) => offer.city.name === cityName);
 
-export const selectOffersLoading = (state: RootState) => state.offers.isLoading;
-
-export const selectOffers = (state: RootState) => state.offers.entities;
-
-export const selectOffersByCity = (state: RootState, name: string) => {
-  const offersList = selectOffers(state);
-
-  return filterOffersByCity(offersList, name);
+export const offersSelector = {
+  entities: (state: RootState) => state.offers.entities,
+  filterdByCity: (state: RootState, name: string) => {
+    const offers = state.offers.entities;
+    return filterOffersByCity(offers, name);
+  },
+  isLoading: (state: RootState) => state.offers.isLoading,
 };
 
 export default offersSlice.reducer;
