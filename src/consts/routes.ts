@@ -1,7 +1,7 @@
 export const ROUTE_PATHS = {
-  MAIN: '/',
-  OFFER: '/offer/:id',
-  LOGIN: '/login',
-  FAVORITES: '/favorites',
-  NOT_FOUND: '*',
+  Main: '/',
+  Offer: '/offer/:id',
+  Login: '/login',
+  Favorites: '/favorites',
+  NotFound: '*',
 } as const;

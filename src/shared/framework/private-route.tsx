@@ -1,14 +1,25 @@
-import { ROUTE_PATHS } from '@/consts/routes';
+import { FC, PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-type PrivateRouteProps = {
-  children: JSX.Element;
+import { userSelector } from '@/store/user';
+import { AuthorizationStatus } from '@/types/user';
+
+import { ROUTE_PATHS } from '@/consts/routes';
+import { WithLoader } from '../hoc';
+
+const PrivateRoute: FC<PropsWithChildren> = ({ children }) => {
+  const authorizationStatus = useSelector(userSelector.authorizationStatus);
+
+  const isLoading = authorizationStatus === AuthorizationStatus.Unknown;
+
+  const hasAccess = authorizationStatus === AuthorizationStatus.Auth;
+
+  return (
+    <WithLoader isLoading={isLoading}>
+      {hasAccess ? children : <Navigate to={ROUTE_PATHS.Login} />}
+    </WithLoader>
+  );
 };
-
-function PrivateRoute({ children }: PrivateRouteProps): JSX.Element {
-  const hasAccess = true;
-
-  return hasAccess ? children : <Navigate to={ROUTE_PATHS.LOGIN} />;
-}
 
 export default PrivateRoute;
