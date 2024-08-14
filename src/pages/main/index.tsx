@@ -1,7 +1,6 @@
 import { ReactNode, useState } from 'react';
 
-import { useLoadOffers } from '@/hooks/use-load-offers';
-import { useFilterOffersByCity } from '@/hooks/use-cities';
+import { useFilterOffersByCity, useLoadOffers } from '@/hooks/offers';
 import { useSortOffers } from '@/hooks/use-sort-offers';
 
 import { City } from '@/types/city';
