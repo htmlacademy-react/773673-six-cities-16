@@ -1,4 +1,4 @@
-import { useAuthorize } from '@/hooks/authorization';
+import { useAuthorize } from '@/hooks/user';
 import { FC, useState } from 'react';
 
 type AuthFormData = {

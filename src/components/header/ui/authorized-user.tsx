@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { ROUTE_PATHS } from '@/consts/routes';
 import { UserInfo } from '@/types/user';
-import { useLogout } from '@/hooks/authorization';
+import { useLogout } from '@/hooks/user';
 
 type Props = {
   user: UserInfo;
@@ -21,7 +21,7 @@ export const AuthorizedUser: FC<Props> = ({ user }) => {
       <li className="header__nav-item user">
         <Link
           className="header__nav-link header__nav-link--profile"
-          to={ROUTE_PATHS.Favorites}
+          to={ROUTE_PATHS.FAVORITES}
         >
           <div className="header__avatar-wrapper user__avatar-wrapper"></div>
           <span className="header__user-name user__name">{user.name}</span>
