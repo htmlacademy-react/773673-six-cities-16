@@ -19,7 +19,7 @@ export const fetchOffers = createAsyncThunk<
   }
 >('offers/fetchOffers', async (_arg, { extra: api }) => {
   try {
-    const offersResponse = await api.getOffers();
+    const offersResponse = await api.offers.getOffers();
     return offersResponse;
   } catch (error) {
     // eslint-disable-next-line no-console
