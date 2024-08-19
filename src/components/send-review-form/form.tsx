@@ -1,24 +1,23 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import ReviewRatingStars from './rating-stars';
 
-import { formatDate } from '@/shared/lib';
-import { SendReviewDTO, SendReviewFormData } from './types';
+import { SendReviewFormData } from './types';
 
 const initialState: SendReviewFormData = {
   text: '',
-  rating: 5,
+  rating: 0,
 };
 
 type SendReviewFormProps = {
-  id: string;
+  onSubmit: ({ text, rating }: { text: string; rating: number }) => void;
 };
 
-export const SendReviewForm = ({ id }: SendReviewFormProps): JSX.Element => {
+export const SendReviewForm: FC<SendReviewFormProps> = ({
+  onSubmit,
+}): JSX.Element => {
   const [formData, setFormData] = useState<SendReviewFormData>(initialState);
 
   const submitDisabled = formData.text.length < 50;
-
-  const sendReview = (data: SendReviewDTO) => data;
 
   const handleRatingChanged = (rating: number) => {
     setFormData((prevFormData) => ({
@@ -37,15 +36,12 @@ export const SendReviewForm = ({ id }: SendReviewFormProps): JSX.Element => {
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const time = new Date();
-    const formattedDateString = formatDate(time);
-
-    sendReview({
+    onSubmit({
       text: formData.text,
       rating: formData.rating,
-      date: formattedDateString,
-      offerId: id,
     });
+
+    setFormData(initialState);
   };
 
   return (
