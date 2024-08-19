@@ -24,8 +24,10 @@ export const Main = (): ReactNode => {
 
   const [currentCity, currentOffers, changeCity] = useFilterOffersByCity();
 
-  const [sortedOffers, sortingType, changeSortingType] =
-    useSortOffers(currentOffers);
+  const [sortedOffers, sortingType, changeSortingType] = useSortOffers(
+    currentOffers,
+    currentOffers,
+  );
 
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
     undefined,
