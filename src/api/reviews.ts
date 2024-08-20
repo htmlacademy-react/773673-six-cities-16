@@ -16,10 +16,7 @@ const getReviews = async (id: string) => {
   }
 };
 
-type SendReviewResponse = {
-  comment: string;
-  rating: number;
-};
+type SendReviewResponse = Review;
 
 const sendReview = async (id: string, data: SendReviewDTO) => {
   try {
