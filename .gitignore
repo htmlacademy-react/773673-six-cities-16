@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
+.yarn/*
 .pnp.js
 
 # testing
@@ -24,3 +25,4 @@ yarn-error.log*
 .idea
 *.sublime*
 .vscode
+
