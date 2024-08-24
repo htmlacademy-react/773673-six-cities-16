@@ -1,20 +1,31 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+import { RootState } from '@/types/store';
 import { City } from '@/types/city';
 
 import { cities } from '@/consts/cities';
 
-type CurrentCityState = City;
+type CurrentCityState = {
+  currentCity: City;
+};
 
-const initialState: CurrentCityState = cities[0];
+const initialState: CurrentCityState = {
+  currentCity: cities[0],
+};
 
 export const currentCitySlice = createSlice({
   name: 'currentCity',
   initialState,
   reducers: {
-    changed: (state, action: PayloadAction<City>) => action.payload,
+    changed: (state, action: PayloadAction<City>) => {
+      state.currentCity = action.payload;
+    },
   },
 });
+
+export const currentCitySelector = {
+  currentCity: (state: RootState) => state.currentCity.currentCity,
+};
 
 export const { changed: cityChanged } = currentCitySlice.actions;
 

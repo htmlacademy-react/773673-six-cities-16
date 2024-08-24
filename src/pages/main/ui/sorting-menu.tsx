@@ -1,27 +1,26 @@
 import { useState } from 'react';
 import cn from 'classnames';
 
-const sortingTypes = [
-  'Popular',
-  'Price: low to high',
-  'Price: high to low',
-  'Top rated first',
-] as const;
+import { SortingTypes } from '@/consts/sorting-types';
 
-type SortingType = (typeof sortingTypes)[number];
+type SortingMenuProps = {
+  currentSortingType: SortingTypes;
+  onSortingTypeChanged: (sorting: SortingTypes) => void;
+};
 
-export const SortingTypes = () => {
+export const SortingMenu = ({
+  onSortingTypeChanged,
+  currentSortingType,
+}: SortingMenuProps) => {
   const [isOpened, setIsOpened] = useState(false);
-  const [currentSortingType, setCurrentSortingType] =
-    useState<SortingType>('Popular');
 
   const handleChangeIsOpened = () => {
     setIsOpened((prevState) => !prevState);
   };
 
-  const handleChangeSortingType = (sorting: SortingType) => {
-    setCurrentSortingType(sorting);
+  const handleChangeSortingType = (sorting: SortingTypes) => {
     setIsOpened(false);
+    onSortingTypeChanged(sorting);
   };
 
   return (
@@ -42,7 +41,7 @@ export const SortingTypes = () => {
           'places__options--opened': isOpened,
         })}
       >
-        {sortingTypes.map((sorting) => (
+        {Object.values(SortingTypes).map((sorting) => (
           <li
             onClick={() => handleChangeSortingType(sorting)}
             key={sorting}

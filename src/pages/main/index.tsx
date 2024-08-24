@@ -1,21 +1,52 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 
-import { useCities } from '@/hooks/use-cities';
+import { useFilterOffersByCity, useLoadOffers } from '@/hooks/offers';
+import { useSortOffers } from '@/hooks/use-sort-offers';
 
 import { City } from '@/types/city';
+import { Offer } from '@/types/offer';
 
 import { CitiesList } from './ui/cities-list';
 import { EmptyLocation } from './ui/empty-location';
+import { LocationsTitle } from './ui/locations-title';
+import { SortingMenu } from './ui/sorting-menu';
 
-import { LocationsList } from '@/components/locations-list';
+import { Map as MapComponent } from '@/components/map';
+import { OffersList } from '@/components/offers-list';
 
 import { cities } from '@/consts/cities';
+import { SortingTypes } from '@/consts/sorting-types';
+
+import { WithLoader } from '@/shared/hoc';
 
 export const Main = (): ReactNode => {
-  const [currentCity, currentOffers, changeCity] = useCities(cities);
+  const [isLoading] = useLoadOffers();
 
-  const handleChangeCity = (city: City) => {
+  const [currentCity, currentOffers, changeCity] = useFilterOffersByCity();
+
+  const [sortedOffers, sortingType, changeSortingType] =
+    useSortOffers(currentOffers);
+
+  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
+    undefined,
+  );
+
+  const offersCount = currentOffers.length;
+
+  const handleCityChanged = (city: City) => {
     changeCity(city);
+  };
+
+  const handleSortingTypeChanged = (type: SortingTypes) => {
+    changeSortingType(type);
+  };
+
+  const handleOfferSelected = (offer: Offer) => {
+    setSelectedOffer(offer);
+  };
+
+  const handleOfferUnselected = () => {
+    setSelectedOffer(undefined);
   };
 
   return (
@@ -27,16 +58,44 @@ export const Main = (): ReactNode => {
             <CitiesList
               cities={cities}
               currentCity={currentCity}
-              onChangeCity={handleChangeCity}
+              onCityChanged={handleCityChanged}
             />
           </section>
         </div>
         <div className="cities">
-          {currentOffers.length ? (
-            <LocationsList offers={currentOffers} currentCity={currentCity} />
-          ) : (
-            <EmptyLocation currentCity={currentCity} />
-          )}
+          <WithLoader isLoading={isLoading}>
+            {currentOffers.length ? (
+              <div className="cities__places-container container">
+                <section className="cities__places places">
+                  <h2 className="visually-hidden">Places</h2>
+                  <LocationsTitle
+                    offersCount={offersCount}
+                    city={currentCity.name}
+                  />
+                  <SortingMenu
+                    currentSortingType={sortingType}
+                    onSortingTypeChanged={handleSortingTypeChanged}
+                  />
+                  <OffersList
+                    kind="cities"
+                    offers={sortedOffers}
+                    onOfferSelected={handleOfferSelected}
+                    onOfferUnselected={handleOfferUnselected}
+                  />
+                </section>
+                <div className="cities__right-section">
+                  <MapComponent
+                    kind="cities"
+                    city={currentCity}
+                    points={currentOffers}
+                    selectedPoint={selectedOffer}
+                  />
+                </div>
+              </div>
+            ) : (
+              <EmptyLocation currentCity={currentCity} />
+            )}
+          </WithLoader>
         </div>
       </main>
     </div>

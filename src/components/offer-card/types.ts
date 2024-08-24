@@ -1,12 +1,3 @@
-export type OfferCardProps = {
-  offer: {
-    id: string;
-    isPremium: boolean;
-    isFavorite: boolean;
-    previewImage: string;
-    price: number;
-    type: string;
-    title: string;
-    rating: number;
-  };
-};
+import { Offer } from '@/types/offer';
+
+export type OfferCardProps = { offer: Offer };

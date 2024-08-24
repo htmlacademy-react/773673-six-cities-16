@@ -11,10 +11,11 @@ import NotFound from '../../pages/not-found';
 import { ROUTE_PATHS } from '@/consts/routes';
 import PrivateRoute from '@/shared/framework/private-route';
 import { offers } from '@/mocks/offers';
+import PublicRoute from '@/shared/framework/public-route';
 
 export const routes: RouteObject[] = [
   {
-    path: ROUTE_PATHS.MAIN,
+    path: ROUTE_PATHS.Main,
     element: <BaseLayout />,
     children: [
       {
@@ -22,11 +23,15 @@ export const routes: RouteObject[] = [
         element: <Main />,
       },
       {
-        path: ROUTE_PATHS.LOGIN,
-        element: <Login />,
+        path: ROUTE_PATHS.Login,
+        element: (
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        ),
       },
       {
-        path: ROUTE_PATHS.FAVORITES,
+        path: ROUTE_PATHS.Favorites,
         element: (
           <PrivateRoute>
             <Favorites offersList={offers} />
@@ -34,11 +39,11 @@ export const routes: RouteObject[] = [
         ),
       },
       {
-        path: ROUTE_PATHS.OFFER,
+        path: ROUTE_PATHS.Offer,
         element: <Offer />,
       },
       {
-        path: ROUTE_PATHS.NOT_FOUND,
+        path: ROUTE_PATHS.NotFound,
         element: <NotFound />,
       },
     ],
