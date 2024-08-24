@@ -8,6 +8,9 @@ import { Offer } from '@/types/offer';
 
 import { AppDispatch, RootState } from '@/types/store';
 import { AppApi } from '@/api';
+import { NameSpace } from '@/consts/namespace';
+
+type PickedSlice = Pick<RootState, NameSpace.Offers>;
 
 export const fetchOffers = createAsyncThunk<
   Offer[],
@@ -19,7 +22,7 @@ export const fetchOffers = createAsyncThunk<
   }
 >('offers/fetchOffers', async (_arg, { extra: api }) => {
   try {
-    const offersResponse = await api.getOffers();
+    const offersResponse = await api.offers.getOffers();
     return offersResponse;
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -63,12 +66,12 @@ const filterOffersByCity = (offersList: Offer[], cityName: string) =>
   offersList.filter((offer) => offer.city.name === cityName);
 
 export const offersSelector = {
-  entities: (state: RootState) => state.offers.entities,
-  filterdByCity: (state: RootState, name: string) => {
+  entities: (state: PickedSlice) => state.offers.entities,
+  filterdByCity: (state: PickedSlice, name: string) => {
     const offers = state.offers.entities;
     return filterOffersByCity(offers, name);
   },
-  isLoading: (state: RootState) => state.offers.isLoading,
+  isLoading: (state: PickedSlice) => state.offers.isLoading,
 };
 
 export default offersSlice.reducer;

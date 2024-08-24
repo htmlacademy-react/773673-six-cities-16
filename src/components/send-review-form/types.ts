@@ -4,8 +4,6 @@ export type SendReviewFormData = {
 };
 
 export type SendReviewDTO = {
-  text: string;
+  comment: string;
   rating: number;
-  date: string;
-  offerId: string;
 };

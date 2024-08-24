@@ -7,7 +7,7 @@ import { Location } from '@/types/location';
 import { City } from '@/types/city';
 
 type NamedLocation = {
-  title: string;
+  id: string;
   location: Location;
 };
 
@@ -38,7 +38,7 @@ export const Map = ({
 
         marker
           .setIcon(
-            selectedPoint !== undefined && point.title === selectedPoint.title
+            selectedPoint !== undefined && point.id === selectedPoint.id
               ? currentCustomIcon
               : defaultCustomIcon,
           )

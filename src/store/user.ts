@@ -52,7 +52,7 @@ export const login = createAsyncThunk<
   }
 >('user/login', async ({ email, password }, { dispatch, extra: api }) => {
   try {
-    const loginResponse = await api.login({ email, password });
+    const loginResponse = await api.user.login({ email, password });
     const token = loginResponse.token;
     tokenStorage.set(token);
     dispatch(loggedIn(loginResponse));
@@ -73,7 +73,7 @@ export const logout = createAsyncThunk<
   }
 >('user/login', async (_arg, { dispatch, extra: api }) => {
   try {
-    await api.logout();
+    await api.user.logout();
     tokenStorage.reset();
     dispatch(loggedOut());
   } catch (error) {
@@ -93,7 +93,7 @@ export const checkAuthorized = createAsyncThunk<
   }
 >('user/checkedAuth', async (_arg, { dispatch, extra: api }) => {
   try {
-    const checkAuthResponse = await api.checkAuth();
+    const checkAuthResponse = await api.user.checkAuth();
     dispatch(loggedIn(checkAuthResponse));
   } catch (error) {
     // eslint-disable-next-line no-console

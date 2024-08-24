@@ -1,4 +1,4 @@
-import { useAuthorize } from '@/hooks/authorization';
+import { useAuthorize } from '@/hooks/user';
 import { FC, useState } from 'react';
 
 type AuthFormData = {
@@ -8,6 +8,7 @@ type AuthFormData = {
 
 export const AuthForm: FC = () => {
   const authorize = useAuthorize();
+
   const [formData, setFormData] = useState<AuthFormData>({
     email: '',
     password: '',

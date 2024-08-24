@@ -15,7 +15,7 @@ import PublicRoute from '@/shared/framework/public-route';
 
 export const routes: RouteObject[] = [
   {
-    path: ROUTE_PATHS.Main,
+    path: ROUTE_PATHS.MAIN,
     element: <BaseLayout />,
     children: [
       {
@@ -23,7 +23,7 @@ export const routes: RouteObject[] = [
         element: <Main />,
       },
       {
-        path: ROUTE_PATHS.Login,
+        path: ROUTE_PATHS.LOGIN,
         element: (
           <PublicRoute>
             <Login />
@@ -31,7 +31,7 @@ export const routes: RouteObject[] = [
         ),
       },
       {
-        path: ROUTE_PATHS.Favorites,
+        path: ROUTE_PATHS.FAVORITES,
         element: (
           <PrivateRoute>
             <Favorites offersList={offers} />
@@ -39,11 +39,11 @@ export const routes: RouteObject[] = [
         ),
       },
       {
-        path: ROUTE_PATHS.Offer,
+        path: ROUTE_PATHS.OFFER,
         element: <Offer />,
       },
       {
-        path: ROUTE_PATHS.NotFound,
+        path: ROUTE_PATHS.NOT_FOUND,
         element: <NotFound />,
       },
     ],

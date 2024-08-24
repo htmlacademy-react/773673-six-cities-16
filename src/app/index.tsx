@@ -3,13 +3,13 @@ import router from './router';
 
 import { Provider } from 'react-redux';
 import { store } from '@/store';
-import { Root } from './root';
+import { Bootstrap } from './bootstrap';
 
 const App = () => (
   <Provider store={store}>
-    <Root>
+    <Bootstrap>
       <RouterProvider router={router} />
-    </Root>
+    </Bootstrap>
   </Provider>
 );
 
