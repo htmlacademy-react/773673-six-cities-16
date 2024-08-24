@@ -8,6 +8,7 @@ type AuthFormData = {
 
 export const AuthForm: FC = () => {
   const authorize = useAuthorize();
+
   const [formData, setFormData] = useState<AuthFormData>({
     email: '',
     password: '',

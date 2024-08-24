@@ -1,39 +1,34 @@
 import { useEffect, useState } from 'react';
 
-import { City } from '@/types/city';
 import { Offer } from '@/types/offer';
 
 import { useAppDispatch, useAppSelector } from './store';
 
 import { fetchOffers, offersSelector } from '@/store/offers';
-import { currentCitySelector, cityChanged } from '@/store/current-city';
+import { currentCitySelector } from '@/store/current-city';
 
 import { SortingTypes } from '@/consts/sorting-types';
 
 export const useLoadOffers = () => {
   const dispatch = useAppDispatch();
 
-  const isLoading = useAppSelector(offersSelector.isLoading);
+  const loading = useAppSelector(offersSelector.isLoading);
 
   useEffect(() => {
     dispatch(fetchOffers());
   }, [dispatch]);
 
-  return [isLoading];
+  return { loading, error: undefined };
 };
 
 export const useFilterOffersByCity = () => {
-  const dispatch = useAppDispatch();
-
   const currentCity = useAppSelector(currentCitySelector.currentCity);
 
   const filteredOffers = useAppSelector((state) =>
     offersSelector.filterdByCity(state, currentCity.name),
   );
 
-  const changeCity = (city: City) => dispatch(cityChanged(city));
-
-  return [currentCity, filteredOffers, changeCity] as const;
+  return [currentCity, filteredOffers] as const;
 };
 
 const sortOffersByType = (
@@ -45,11 +40,11 @@ const sortOffersByType = (
     case SortingTypes.POPULAR:
       return unsortedOffers;
     case SortingTypes.PRICE_LOW_TO_HIGH:
-      return offers.sort((a, b) => a.price - b.price);
+      return offers.toSorted((a, b) => a.price - b.price);
     case SortingTypes.PRICE_HIGH_TO_LOW:
-      return offers.sort((a, b) => b.price - a.price);
+      return offers.toSorted((a, b) => b.price - a.price);
     case SortingTypes.TOP_RATED_FIRST:
-      return offers.sort((a, b) => b.rating - a.rating);
+      return offers.toSorted((a, b) => b.rating - a.rating);
     default:
       return offers;
   }

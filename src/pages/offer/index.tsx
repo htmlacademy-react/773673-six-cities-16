@@ -1,10 +1,7 @@
 import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { SendReviewForm } from '@/components/send-review-form/form';
 import { OffersList } from '@/components/offers-list';
-import { WithPrivate } from '@/components/with-private';
-import ReviewsList from '@/components/reviews-list';
 import { Map } from '@/components/map';
 
 import { Features } from './ui/features';
@@ -13,21 +10,17 @@ import { Goods } from './ui/goods';
 import { Host } from './ui/host';
 
 import { useLoadOfferData } from '@/hooks/use-load-offer-data';
-import { useSendReview } from '@/hooks/reviews';
 
 import { RatingStars } from '@/shared/ui/rating-stars';
 import { Spinner } from '@/shared/ui';
 
 import NotFound from '../not-found';
+import { OfferReviews } from './ui/offer-reviews';
 
-//@TODO: Add ReviewForm submit handler
 const OfferPage: FC = () => {
   const { id } = useParams() as { id: string };
 
-  const { loading, error, offer, reviews, offersNearby, setReviews } =
-    useLoadOfferData(id);
-
-  const sendReview = useSendReview(id);
+  const { loading, error, offer, offersNearby } = useLoadOfferData(id);
 
   if (error) {
     return <NotFound />;
@@ -37,22 +30,10 @@ const OfferPage: FC = () => {
     return <Spinner />;
   }
 
-  const handleSendReview = ({
-    text,
-    rating,
-  }: {
-    text: string;
-    rating: number;
-  }) => {
-    sendReview({ comment: text, rating }).then((comment) =>
-      setReviews((prev) => [...prev, comment]),
-    );
-  };
-
   return (
     <div className="page">
       <main className="page__main page__main--offer">
-        {offer && offersNearby && reviews && (
+        {offer && offersNearby && (
           <section className="offer">
             <Gallery images={offer.images} />
             <div className="offer__container container">
@@ -91,16 +72,7 @@ const OfferPage: FC = () => {
                 <Goods goods={offer.goods} />
                 <Host host={offer.host} description={offer.description} />
 
-                <section className="offer__reviews reviews">
-                  <h2 className="reviews__title">
-                    Reviews &middot;{' '}
-                    <span className="reviews__amount">{reviews.length}</span>
-                  </h2>
-                  <ReviewsList reviews={reviews} />
-                  <WithPrivate>
-                    <SendReviewForm onSubmit={handleSendReview} />
-                  </WithPrivate>
-                </section>
+                <OfferReviews id={id} />
               </div>
             </div>
 
