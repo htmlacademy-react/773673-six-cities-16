@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './components/private-route';
 
 import Main from './pages/main';
-
 import Login from './pages/login';
 import Offer from './pages/offer';
 import Favorites from './pages/favorites';
