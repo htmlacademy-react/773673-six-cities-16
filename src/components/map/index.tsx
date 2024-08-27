@@ -14,7 +14,7 @@ type NamedLocation = {
 type MapProps = {
   city: City;
   points: NamedLocation[];
-  selectedPoint: NamedLocation | undefined;
+  selectedPoint: NamedLocation | null;
   kind: 'offer' | 'cities';
 };
 
@@ -38,7 +38,7 @@ export const Map = ({
 
         marker
           .setIcon(
-            selectedPoint !== undefined && point.id === selectedPoint.id
+            selectedPoint !== null && point.id === selectedPoint.id
               ? currentCustomIcon
               : defaultCustomIcon,
           )
