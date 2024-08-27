@@ -1,4 +1,4 @@
-import { RouteObject } from 'react-router-dom';
+import { Navigate, RouteObject } from 'react-router-dom';
 
 import { BaseLayout } from '../../shared/ui';
 
@@ -7,21 +7,33 @@ import { Main } from '../../pages/main';
 import { Favorites } from '../../pages/favorites';
 import Offer from '../../pages/offer';
 import NotFound from '../../pages/not-found';
+import { Places } from '@/pages/main/ui/places';
 
 import { ROUTE_PATHS } from '@/consts/routes';
 import PrivateRoute from '@/shared/framework/private-route';
-import { offers } from '@/mocks/offers';
 import PublicRoute from '@/shared/framework/public-route';
+
+import { cities } from '@/consts/cities';
 
 export const routes: RouteObject[] = [
   {
-    path: ROUTE_PATHS.MAIN,
     element: <BaseLayout />,
     children: [
       {
-        index: true,
         element: <Main />,
+        path: ROUTE_PATHS.MAIN,
+        children: [
+          {
+            index: true,
+            element: <Navigate to={`/${cities[0].name}`} />,
+          },
+          ...cities.map((city) => ({
+            path: `/${city.name}`,
+            element: <Places city={city} />,
+          })),
+        ],
       },
+
       {
         path: ROUTE_PATHS.LOGIN,
         element: (
@@ -34,7 +46,7 @@ export const routes: RouteObject[] = [
         path: ROUTE_PATHS.FAVORITES,
         element: (
           <PrivateRoute>
-            <Favorites offersList={offers} />
+            <Favorites />
           </PrivateRoute>
         ),
       },

@@ -1,8 +1,10 @@
-import { useState } from 'react';
-
 import { Offer } from '@/types/offer';
 
-import { useFilterOffersByCity, useLoadOffers } from '@/hooks/offers';
+import {
+  useFilterOffersByCity,
+  useHoverOffer,
+  useLoadOffers,
+} from '@/hooks/offers';
 
 import { LocationsTitle } from './locations-title';
 import { SortedOffers } from './sorted-offers';
@@ -11,23 +13,22 @@ import { EmptyLocation } from './empty-location';
 import { Map as MapComponent } from '@/components/map';
 
 import { WithLoader } from '@/shared/hoc';
+import { City } from '@/types/city';
 
-export const Places = () => {
+export const Places = ({ city }: { city: City }) => {
   const { loading } = useLoadOffers();
-  const [currentCity, currentOffers] = useFilterOffersByCity();
-  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
-    undefined,
-  );
+  const [currentOffers] = useFilterOffersByCity(city);
+  const { activeOffer, setActiveOffer } = useHoverOffer();
 
   const offersCount = currentOffers.length;
   const isEmpty = offersCount === 0;
 
   const handleOfferHovered = (offer: Offer) => {
-    setSelectedOffer(offer);
+    setActiveOffer(offer);
   };
 
   const handleOfferUnhovered = () => {
-    setSelectedOffer(undefined);
+    setActiveOffer(null);
   };
 
   return !isEmpty ? (
@@ -39,20 +40,20 @@ export const Places = () => {
             onOfferUnhoverd={handleOfferUnhovered}
             onOfferHoverd={handleOfferHovered}
           >
-            <LocationsTitle offersCount={offersCount} city={currentCity.name} />
+            <LocationsTitle offersCount={offersCount} city={city.name} />
           </SortedOffers>
           <div className="cities__right-section">
             <MapComponent
               kind="cities"
-              city={currentCity}
+              city={city}
               points={currentOffers}
-              selectedPoint={selectedOffer}
+              selectedPoint={activeOffer}
             />
           </div>
         </div>
       </div>
     </WithLoader>
   ) : (
-    <EmptyLocation city={currentCity} />
+    <EmptyLocation city={city} />
   );
 };
