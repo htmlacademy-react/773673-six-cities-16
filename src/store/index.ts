@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import api from '@/api';
 
-import offersReducer from './offers';
+import offersReducer from './offers/slice';
 import userReducer from './user/slice';
 import favoritesReducer from './favorites/slice';
 

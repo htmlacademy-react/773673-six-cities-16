@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Offer } from '@/types/offer';
+import { City } from '@/types/city';
 
 import { useAppDispatch, useAppSelector } from './store';
 
-import {
-  activeOfferChanged,
-  fetchOffers,
-  offersSelector,
-} from '@/store/offers';
+import { fetchOffers } from '@/store/offers/async-actions';
+import { offersSelector } from '@/store/offers/selectors';
+import { activeOfferChanged } from '@/store/offers/slice';
 
 import { SortingTypes } from '@/consts/sorting-types';
-import { useSelector } from 'react-redux';
-import { City } from '@/types/city';
 
 export const useLoadOffers = () => {
   const dispatch = useAppDispatch();
