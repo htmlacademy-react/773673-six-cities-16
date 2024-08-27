@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'token';
+const STORAGE_KEY = 'six-cities-token';
 
 export const tokenStorage = {
   get: () => localStorage.getItem(STORAGE_KEY),

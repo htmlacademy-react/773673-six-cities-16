@@ -14,7 +14,7 @@ enum OfferRate {
 const ReviewRatingStar = ({ value, onRatingChange }: ReviewRatingStarProps) => (
   <>
     <input
-      onChange={(evt) => onRatingChange(Number(evt.target.value))}
+      onChange={(event) => onRatingChange(Number(event.target.value))}
       className="form__rating-input visually-hidden"
       name="rating"
       value={value}

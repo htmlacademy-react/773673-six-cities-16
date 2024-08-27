@@ -2,15 +2,10 @@ import { FC, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 
-import { OffersList } from '@/components/offers-list';
-import { Map } from '@/components/map';
-
 import { Features } from './ui/features';
 import { Gallery } from './ui/gallery';
 import { Goods } from './ui/goods';
 import { Host } from './ui/host';
-
-import { useLoadOfferData } from '@/hooks/use-load-offer-data';
 
 import { RatingStars } from '@/shared/ui/rating-stars';
 import { Spinner } from '@/shared/ui';
@@ -18,11 +13,13 @@ import { Spinner } from '@/shared/ui';
 import NotFound from '../not-found';
 import { OfferReviews } from './ui/offer-reviews';
 import { useToggleFavorite } from '@/hooks/favorites';
+import { OffersNearby } from './ui/offers-nearby';
+import { useLoadOfferById } from '@/hooks/offers';
 
 const OfferPage: FC = () => {
   const { id } = useParams() as { id: string };
 
-  const { loading, error, offer, offersNearby } = useLoadOfferData(id);
+  const { offer, loading, error } = useLoadOfferById(id);
 
   const [isFavorite, setIsFavorite] = useState<boolean>(
     offer?.isFavorite || false,
@@ -46,7 +43,7 @@ const OfferPage: FC = () => {
   return (
     <div className="page">
       <main className="page__main page__main--offer">
-        {offer && offersNearby && (
+        {offer && (
           <section className="offer">
             <Gallery images={offer.images} />
             <div className="offer__container container">
@@ -91,21 +88,7 @@ const OfferPage: FC = () => {
                 <OfferReviews id={id} />
               </div>
             </div>
-
-            <Map
-              kind="offer"
-              city={offer.city}
-              points={offersNearby}
-              selectedPoint={offer}
-            />
-            <section className="container">
-              <section className="near-places places">
-                <h2 className="near-places__title">
-                  Other places in the neighbourhood
-                </h2>
-                <OffersList kind="nearby" offers={offersNearby} />
-              </section>
-            </section>
+            <OffersNearby offer={offer} />
           </section>
         )}
       </main>

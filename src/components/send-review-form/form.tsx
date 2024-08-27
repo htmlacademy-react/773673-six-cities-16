@@ -8,16 +8,17 @@ const initialState: SendReviewFormData = {
   rating: 0,
 };
 
-type SendReviewFormProps = {
+type Props = {
   onSubmit: ({ text, rating }: { text: string; rating: number }) => void;
 };
 
-export const SendReviewForm: FC<SendReviewFormProps> = ({
-  onSubmit,
-}): JSX.Element => {
+export const SendReviewForm: FC<Props> = ({ onSubmit }): JSX.Element => {
   const [formData, setFormData] = useState<SendReviewFormData>(initialState);
 
-  const submitDisabled = formData.text.length < 50;
+  const submitDisabled =
+    formData.text.length < 50 ||
+    formData.text.length > 300 ||
+    formData.rating === 0;
 
   const handleRatingChanged = (rating: number) => {
     setFormData((prevFormData) => ({
