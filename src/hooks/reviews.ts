@@ -9,6 +9,7 @@ export const useLoadReviews = (id: string) => {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
+    setLoading(true);
     api.reviews
       .getReviews(id)
       .then(setReviews)

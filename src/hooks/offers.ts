@@ -11,6 +11,8 @@ import { offersSelector } from '@/store/offers/selectors';
 import { activeOfferChanged } from '@/store/offers/slice';
 
 import { SortingTypes } from '@/consts/sorting-types';
+import api from '@/api';
+import { OfferExtended } from '@/types/offer-extended';
 
 export const useLoadOffers = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +26,28 @@ export const useLoadOffers = () => {
   return { loading, error: undefined };
 };
 
+export const useLoadOffersNearby = (id: string) => {
+  const [offers, setOffers] = useState<Offer[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    setLoading(true);
+    api.offers
+      .getOffersNearby(id)
+      .then(setOffers)
+      .catch(setError)
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [id]);
+
+  return {
+    offersNearby: offers,
+    error,
+    loading,
+  };
+};
 export const useFilterOffersByCity = (city: City) => {
   const filteredOffers = useAppSelector((state) =>
     offersSelector.filterdByCity(state, city.name),
@@ -74,4 +98,21 @@ export const useHoverOffer = () => {
   };
 
   return { activeOffer, setActiveOffer };
+};
+
+export const useLoadOfferById = (id: string) => {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  const [offer, setOffer] = useState<OfferExtended | null>(null);
+
+  useEffect(() => {
+    api.offers
+      .getOfferById(id)
+      .then(setOffer)
+      .catch((err: Error) => setError(err))
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  return { loading, error, offer };
 };

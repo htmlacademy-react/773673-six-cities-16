@@ -24,6 +24,13 @@ export const OfferReviews: FC<Props> = ({ id }) => {
   }
 
   const reviewsCount = reviews.length;
+  const reviewsSliced = reviews.slice(0, 10);
+
+  const sortedReviews = reviewsSliced.toSorted((a, b) => {
+    const firstDate = new Date(a.date).getTime();
+    const secondDate = new Date(b.date).getTime();
+    return secondDate - firstDate;
+  });
 
   const handleSendReview = ({
     text,
@@ -33,7 +40,7 @@ export const OfferReviews: FC<Props> = ({ id }) => {
     rating: number;
   }) => {
     sendReview({ comment: text, rating }).then((review) => {
-      setReviews((prev) => [...prev, review]);
+      setReviews((prev) => [review, ...prev]);
     });
   };
 
@@ -42,7 +49,7 @@ export const OfferReviews: FC<Props> = ({ id }) => {
       <h2 className="reviews__title">
         Reviews &middot; <span className="reviews__amount">{reviewsCount}</span>
       </h2>
-      <ReviewsList reviews={reviews} />
+      <ReviewsList reviews={sortedReviews} />
       <WithPrivate>
         <SendReviewForm onSubmit={handleSendReview} />
       </WithPrivate>
