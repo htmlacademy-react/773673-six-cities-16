@@ -13,13 +13,13 @@ type Props = {
 
 export const OfferReviews: FC<Props> = ({ id }) => {
   const sendReview = useSendReview(id);
-  const { isLoading, isError, error, data: reviews } = useLoadReviews(id);
+  const { loading, error, reviews, setReviews } = useLoadReviews(id);
 
-  if (isError) {
+  if (error) {
     return <h2>Error: {error.message}</h2>;
   }
 
-  if (isLoading) {
+  if (loading) {
     return <Spinner />;
   }
 
@@ -32,7 +32,9 @@ export const OfferReviews: FC<Props> = ({ id }) => {
     text: string;
     rating: number;
   }) => {
-    sendReview({ comment: text, rating });
+    sendReview({ comment: text, rating }).then((review) => {
+      setReviews((prev) => [...prev, review]);
+    });
   };
 
   return (

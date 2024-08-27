@@ -9,6 +9,7 @@ import { Offer } from '@/types/offer';
 import { AppDispatch, RootState } from '@/types/store';
 import { AppApi } from '@/api';
 import { NameSpace } from '@/consts/namespace';
+import { toggleFavorite } from './favorites/async-actions';
 
 type PickedSlice = Pick<RootState, NameSpace.Offers>;
 
@@ -20,23 +21,19 @@ export const fetchOffers = createAsyncThunk<
     state: RootState;
     extra: AppApi;
   }
->('offers/fetchOffers', async (_arg, { extra: api }) => {
-  try {
-    const offersResponse = await api.offers.getOffers();
-    return offersResponse;
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
-    throw error;
-  }
-});
+>('offers/fetchOffers', (_arg, { extra: api }) => api.offers.getOffers());
 
 type OffersState = {
   entities: Offer[];
   isLoading: boolean;
+  activeOffer: Offer | null;
 };
 
-const initialState: OffersState = { entities: [], isLoading: false };
+const initialState: OffersState = {
+  entities: [],
+  isLoading: false,
+  activeOffer: null,
+};
 
 export const offersSlice = createSlice({
   name: 'offers',
@@ -44,6 +41,9 @@ export const offersSlice = createSlice({
   reducers: {
     loaded: (state, action: PayloadAction<Offer[]>) => {
       state.entities = action.payload;
+    },
+    activeOfferChanged: (state, action: PayloadAction<Offer | null>) => {
+      state.activeOffer = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -57,10 +57,18 @@ export const offersSlice = createSlice({
     builder.addCase(fetchOffers.rejected, (state) => {
       state.isLoading = false;
     });
+    builder.addCase(toggleFavorite.fulfilled, (state, action) => {
+      const changedEntity = state.entities.find(
+        (entity) => entity.id === action.payload.id,
+      );
+      if (changedEntity) {
+        changedEntity.isFavorite = action.payload.isFavorite;
+      }
+    });
   },
 });
 
-export const { loaded: offersLoaded } = offersSlice.actions;
+export const { loaded: offersLoaded, activeOfferChanged } = offersSlice.actions;
 
 const filterOffersByCity = (offersList: Offer[], cityName: string) =>
   offersList.filter((offer) => offer.city.name === cityName);
@@ -72,6 +80,7 @@ export const offersSelector = {
     return filterOffersByCity(offers, name);
   },
   isLoading: (state: PickedSlice) => state.offers.isLoading,
+  activeOffer: (state: PickedSlice) => state.offers.activeOffer,
 };
 
 export default offersSlice.reducer;

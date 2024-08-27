@@ -4,10 +4,15 @@ import { Offer } from '@/types/offer';
 
 import { useAppDispatch, useAppSelector } from './store';
 
-import { fetchOffers, offersSelector } from '@/store/offers';
-import { currentCitySelector } from '@/store/current-city';
+import {
+  activeOfferChanged,
+  fetchOffers,
+  offersSelector,
+} from '@/store/offers';
 
 import { SortingTypes } from '@/consts/sorting-types';
+import { useSelector } from 'react-redux';
+import { City } from '@/types/city';
 
 export const useLoadOffers = () => {
   const dispatch = useAppDispatch();
@@ -21,14 +26,12 @@ export const useLoadOffers = () => {
   return { loading, error: undefined };
 };
 
-export const useFilterOffersByCity = () => {
-  const currentCity = useAppSelector(currentCitySelector.currentCity);
-
+export const useFilterOffersByCity = (city: City) => {
   const filteredOffers = useAppSelector((state) =>
-    offersSelector.filterdByCity(state, currentCity.name),
+    offersSelector.filterdByCity(state, city.name),
   );
 
-  return [currentCity, filteredOffers] as const;
+  return [filteredOffers] as const;
 };
 
 const sortOffersByType = (
@@ -62,4 +65,15 @@ export const useSortOffers = (offers: Offer[], unsortedOffers: Offer[]) => {
   );
 
   return [sortedOffers, currentSortingType, setCurrentSortingType] as const;
+};
+
+export const useHoverOffer = () => {
+  const dispatch = useAppDispatch();
+  const activeOffer = useSelector(offersSelector.activeOffer);
+
+  const setActiveOffer = (offer: Offer | null) => {
+    dispatch(activeOfferChanged(offer));
+  };
+
+  return { activeOffer, setActiveOffer };
 };

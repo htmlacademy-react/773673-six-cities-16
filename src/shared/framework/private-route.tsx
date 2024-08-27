@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { AuthorizationStatus } from '@/types/user';
 
-import { userSelector } from '@/store/user';
+import { userSelector } from '@/store/user/selectors';
 
 import { ROUTE_PATHS } from '@/consts/routes';
 import { WithLoader } from '../hoc';

@@ -1,5 +1,5 @@
 import { WithLoader } from '@/shared/hoc';
-import { userSelector } from '@/store/user';
+import { userSelector } from '@/store/user/selectors';
 import { AuthorizationStatus } from '@/types/user';
 import { FC, PropsWithChildren } from 'react';
 import { useSelector } from 'react-redux';

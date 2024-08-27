@@ -3,6 +3,7 @@ import { RatingStars } from '@/shared/ui/rating-stars';
 import { OfferCardProps } from './types';
 import { FavoriteButton } from '../toggle-favorite-button';
 import { Offer } from '@/types/offer';
+import { useToggleFavorite } from '@/hooks/favorites';
 
 type Props = OfferCardProps & {
   onOfferSelected: ((offer: Offer) => void) | undefined;
@@ -14,6 +15,8 @@ export const CitiesOfferCard = ({
   onOfferUnselected,
   offer,
 }: Props) => {
+  const toggleFavorite = useToggleFavorite(offer);
+
   const handleMouseEnter = (offerItem: Offer) => {
     onOfferSelected?.(offerItem);
   };
@@ -50,9 +53,8 @@ export const CitiesOfferCard = ({
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <FavoriteButton
-            id={offer.id}
             isFavorite={offer.isFavorite}
-            onToggle={(id) => id}
+            onToggle={toggleFavorite}
           />
         </div>
         <RatingStars value={offer.rating} kind="place" />
