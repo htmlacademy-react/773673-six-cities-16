@@ -4,7 +4,7 @@ import { Location, Navigate, useLocation } from 'react-router-dom';
 
 import { AuthorizationStatus } from '@/types/user';
 
-import { userSelector } from '@/store/user';
+import { userSelector } from '@/store/user/selectors';
 
 import { ROUTE_PATHS } from '@/consts/routes';
 

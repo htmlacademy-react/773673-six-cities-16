@@ -1,14 +1,13 @@
 import cn from 'classnames';
 
 type Props = {
-  id: string;
   isFavorite: boolean;
-  onToggle: (id: string) => void;
+  onToggle: () => void;
 };
 
-export const FavoriteButton = ({ id, isFavorite, onToggle }: Props) => (
+export const FavoriteButton = ({ isFavorite, onToggle }: Props) => (
   <button
-    onClick={() => onToggle(id)}
+    onClick={() => onToggle()}
     className={cn('place-card__bookmark-button button', {
       'place-card__bookmark-button--active': isFavorite,
     })}

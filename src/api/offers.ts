@@ -33,10 +33,21 @@ type FavoritesResponse = Offer[];
 
 const getFavorites = async () => {
   try {
-    const response = await client.get<FavoritesResponse>('favorites');
+    const response = await client.get<FavoritesResponse>('favorite');
     return response.data;
   } catch (error) {
     throw new Error('Failed to fetch favorites', {
+      cause: error,
+    });
+  }
+};
+
+const changeFavoriteStatus = async (offerId: string, status: 0 | 1) => {
+  try {
+    const response = await client.post<Offer>(`/favorite/${offerId}/${status}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to change favorite status', {
       cause: error,
     });
   }
@@ -61,5 +72,6 @@ export const offersApi = {
   getOffers,
   getOfferById,
   getFavorites,
+  changeFavoriteStatus,
   getOffersNearby,
 };

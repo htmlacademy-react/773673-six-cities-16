@@ -1,5 +1,6 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import cn from 'classnames';
 
 import { OffersList } from '@/components/offers-list';
 import { Map } from '@/components/map';
@@ -16,11 +17,23 @@ import { Spinner } from '@/shared/ui';
 
 import NotFound from '../not-found';
 import { OfferReviews } from './ui/offer-reviews';
+import { useToggleFavorite } from '@/hooks/favorites';
 
 const OfferPage: FC = () => {
   const { id } = useParams() as { id: string };
 
   const { loading, error, offer, offersNearby } = useLoadOfferData(id);
+
+  const [isFavorite, setIsFavorite] = useState<boolean>(
+    offer?.isFavorite || false,
+  );
+
+  const toggleFavorite = useToggleFavorite(offer);
+
+  const handleFavorite = () => {
+    setIsFavorite(!isFavorite);
+    toggleFavorite();
+  };
 
   if (error) {
     return <NotFound />;
@@ -46,7 +59,10 @@ const OfferPage: FC = () => {
                 <div className="offer__name-wrapper">
                   <h1 className="offer__name">{offer.title}</h1>
                   <button
-                    className="offer__bookmark-button button"
+                    onClick={handleFavorite}
+                    className={cn('offer__bookmark-button button', {
+                      'offer__bookmark-button--active': isFavorite,
+                    })}
                     type="button"
                   >
                     <svg
