@@ -11,7 +11,7 @@ import { offersSelector } from '@/store/offers/selectors';
 import { activeOfferChanged } from '@/store/offers/slice';
 
 import { SortingTypes } from '@/consts/sorting-types';
-import api from '@/api';
+import api from '@/api/api';
 import { OfferExtended } from '@/types/offer-extended';
 
 export const useLoadOffers = () => {

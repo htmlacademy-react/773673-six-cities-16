@@ -1,12 +1,12 @@
 import { Navigate, RouteObject } from 'react-router-dom';
 
-import { BaseLayout } from '../../shared/ui';
+import { BaseLayout } from '../../shared/ui/ui';
 
-import Login from '../../pages/login';
-import { Main } from '../../pages/main';
-import { Favorites } from '../../pages/favorites';
-import Offer from '../../pages/offer';
-import NotFound from '../../pages/not-found';
+import Login from '../../pages/login/login';
+import { Main } from '../../pages/main/main';
+import { Favorites } from '../../pages/favorites/favorites';
+import Offer from '../../pages/offer/offer';
+import NotFound from '../../pages/not-found/not-found';
 import { Places } from '@/pages/main/ui/places';
 
 import { ROUTE_PATHS } from '@/consts/routes';

@@ -1,4 +1,4 @@
-import { formatDate } from '@/shared/lib';
+import { formatDate } from '@/shared/lib/lib';
 import { Review } from '@/types/review';
 
 type Props = {

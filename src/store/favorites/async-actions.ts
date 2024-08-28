@@ -1,4 +1,4 @@
-import { AppApi } from '@/api';
+import { AppApi } from '@/api/api';
 import { Offer } from '@/types/offer';
 import { AppDispatch, RootState } from '@/types/store';
 import { createAsyncThunk } from '@reduxjs/toolkit';

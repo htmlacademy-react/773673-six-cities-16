@@ -1,4 +1,4 @@
-import { AppApi } from '@/api';
+import { AppApi } from '@/api/api';
 import { tokenStorage } from '@/storage/token';
 import { AppDispatch, RootState } from '@/types/store';
 import { UserInfo } from '@/types/user';

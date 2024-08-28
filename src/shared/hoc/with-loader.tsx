@@ -1,5 +1,5 @@
 import { PropsWithChildren, type FC } from 'react';
-import { Spinner } from '../ui';
+import { Spinner } from '../ui/ui';
 
 type Props = PropsWithChildren<{ isLoading: boolean }>;
 

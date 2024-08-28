@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import api from '@/api';
+import api from '@/api/api';
 
 import offersReducer from './offers/slice';
 import userReducer from './user/slice';
