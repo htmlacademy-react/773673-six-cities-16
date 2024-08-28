@@ -5,7 +5,7 @@ import { useLoadReviews, useSendReview } from '@/hooks/reviews';
 import ReviewsList from '@/components/reviews-list';
 import { SendReviewForm } from '@/components/send-review-form/form';
 import { WithPrivate } from '@/components/with-private';
-import { Spinner } from '@/shared/ui';
+import { Spinner } from '@/shared/ui/ui';
 
 type Props = {
   id: string;

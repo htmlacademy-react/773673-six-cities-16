@@ -2,7 +2,7 @@ import { OffersList } from '@/components/offers-list';
 import { OfferExtended } from '@/types/offer-extended';
 import { FC } from 'react';
 import { useLoadOffersNearby } from '@/hooks/offers';
-import { Map as MapComponent } from '@/components/map';
+import { Map as MapComponent } from '@/components/map/map';
 
 type Props = {
   offer: OfferExtended;

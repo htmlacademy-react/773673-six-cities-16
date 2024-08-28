@@ -10,9 +10,9 @@ import { LocationsTitle } from './locations-title';
 import { SortedOffers } from './sorted-offers';
 import { EmptyLocation } from './empty-location';
 
-import { Map as MapComponent } from '@/components/map';
+import { Map as MapComponent } from '@/components/map/map';
 
-import { WithLoader } from '@/shared/hoc';
+import { WithLoader } from '@/shared/hoc/hoc';
 import { City } from '@/types/city';
 
 export const Places = ({ city }: { city: City }) => {

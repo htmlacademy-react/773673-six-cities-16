@@ -1,5 +1,5 @@
 import { Offer } from '@/types/offer';
-import { OfferCard } from './offer-card';
+import { OfferCard } from './offer-card/offer-card';
 
 type OffersListPropsType = {
   onOfferSelected?: (offer: Offer) => void;

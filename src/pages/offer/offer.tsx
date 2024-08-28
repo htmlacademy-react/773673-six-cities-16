@@ -8,9 +8,9 @@ import { Goods } from './ui/goods';
 import { Host } from './ui/host';
 
 import { RatingStars } from '@/shared/ui/rating-stars';
-import { Spinner } from '@/shared/ui';
+import { Spinner } from '@/shared/ui/ui';
 
-import NotFound from '../not-found';
+import NotFound from '../not-found/not-found';
 import { OfferReviews } from './ui/offer-reviews';
 import { useToggleFavorite } from '@/hooks/favorites';
 import { OffersNearby } from './ui/offers-nearby';

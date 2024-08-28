@@ -7,7 +7,7 @@ import { AuthorizationStatus } from '@/types/user';
 import { userSelector } from '@/store/user/selectors';
 
 import { ROUTE_PATHS } from '@/consts/routes';
-import { WithLoader } from '../hoc';
+import { WithLoader } from '../hoc/hoc';
 
 const PrivateRoute: FC<PropsWithChildren> = ({ children }) => {
   const authorizationStatus = useSelector(userSelector.authorizationStatus);

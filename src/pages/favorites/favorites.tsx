@@ -1,9 +1,9 @@
 import { Offer } from '@/types/offer';
 
 import { LocationsList } from './ui/locations-list';
-import { Spinner } from '@/shared/ui';
 import { useLoadFavorites } from '@/hooks/favorites';
 import { EmptyFavorites } from './ui/empty-list';
+import { Spinner } from '@/shared/ui/ui';
 
 type CitiesMap = Record<string, Offer[]>;
 

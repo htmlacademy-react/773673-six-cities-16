@@ -1,4 +1,4 @@
-import api from '@/api';
+import api from '@/api/api';
 import { SendReviewDTO } from '@/components/send-review-form/types';
 import { Review } from '@/types/review';
 import { useEffect, useState } from 'react';
