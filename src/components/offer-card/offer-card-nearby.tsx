@@ -37,7 +37,7 @@ export const OfferCardNearby = ({ offer }: OfferCardProps) => {
         </div>
         <RatingStars value={offer.rating} kind="place" />
         <h2 className="place-card__name">
-          <Link to={`/offers/${offer.id}`}>{offer.title}</Link>
+          <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

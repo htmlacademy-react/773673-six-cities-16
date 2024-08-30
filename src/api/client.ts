@@ -3,7 +3,7 @@ import { tokenStorage } from '@/storage/token';
 
 export const client = axios.create({
   baseURL: 'https://16.design.htmlacademy.pro/six-cities',
-  timeout: 500,
+  timeout: 1000,
 });
 
 client.interceptors.request.use(

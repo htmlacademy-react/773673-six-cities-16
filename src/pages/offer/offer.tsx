@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 
@@ -19,16 +19,15 @@ import { useLoadOfferById } from '@/hooks/offers';
 const OfferPage: FC = () => {
   const { id } = useParams() as { id: string };
 
-  const { offer, loading, error } = useLoadOfferById(id);
-
-  const [isFavorite, setIsFavorite] = useState<boolean>(
-    offer?.isFavorite || false,
-  );
+  const { offer, loading, error, setOffer } = useLoadOfferById(id);
 
   const toggleFavorite = useToggleFavorite(offer);
 
   const handleFavorite = () => {
-    setIsFavorite(!isFavorite);
+    if (offer) {
+      setOffer({ ...offer, isFavorite: !offer.isFavorite });
+    }
+
     toggleFavorite();
   };
 
@@ -58,7 +57,7 @@ const OfferPage: FC = () => {
                   <button
                     onClick={handleFavorite}
                     className={cn('offer__bookmark-button button', {
-                      'offer__bookmark-button--active': isFavorite,
+                      'offer__bookmark-button--active': offer.isFavorite,
                     })}
                     type="button"
                   >
